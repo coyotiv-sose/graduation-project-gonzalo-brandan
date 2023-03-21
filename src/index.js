@@ -22,23 +22,26 @@ const gonzalo = new User('Gonzalo')
 const maria = new User('Maria')
 
 gonzalo.bookSession(maria, '2020-01-01', '12:00')
-console.log(`gonzalo's sessions: ${gonzalo.sessions.length === 1}`)
+//console.log(`gonzalo's sessions: ${gonzalo.sessions.length === 1}`)
 
 gonzalo.bookSession(maria, '2020-01-01', '12:00')
-console.log(`gonzalo's sessions: ${gonzalo.sessions.length === 2}`)
+// console.log(`gonzalo's sessions: ${gonzalo.sessions.length === 2}`)
 
-gonzalo.addAvailability('2020-01-01', '12:00')
-console.log(`gonzalo's availability: ${gonzalo.availability.length === 1}`)
+// gonzalo.addAvailability('2020-01-01', '12:00')
+// console.log(`gonzalo's availability: ${gonzalo.availability.length === 1}`)
 
-gonzalo.addAvailability('2020-01-01', '14:00')
-gonzalo.removeAvailability('2020-01-01', '14:00')
+// gonzalo.addAvailability('2020-01-01', '14:00')
+// gonzalo.removeAvailability('2020-01-01', '14:00')
 
-gonzalo.invite(maria, '2020-01-01', '12:00')
-console.log(`gonzalo's invitations: ${gonzalo.invitationsToConfirm.length === 1}`)
+// gonzalo.invite(maria, '2020-01-01', '12:00')
+// console.log(`gonzalo's invitations: ${gonzalo.invitations.length === 1}`)
 
-// maria.acceptInvitation(gonzalo, "2020-01-01", "12:00");
+maria.acceptInvitation(gonzalo.invitations[0])
 // console.log(`gonzalo's invitations: ${gonzalo.invitationsToConfirm.length === 0}`);
 
-console.log(gonzalo)
-console.log('#'.repeat(50))
-console.log(maria)
+// console.log(gonzalo)
+// console.log('#'.repeat(50))
+// console.log(maria)
+
+// how to get the details of gonzalo using getters?
+console.log(gonzalo.details)

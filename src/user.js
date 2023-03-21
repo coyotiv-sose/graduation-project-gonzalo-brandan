@@ -3,9 +3,7 @@ const Tandem = require('./tandem')
 class User {
   language = ''
   sessions = []
-  invitationsToConfirm = []
-  invitationsAccepted = []
-  invitationsSent = []
+  invitations = []
   availability = []
   // status changing in invitation so I create only one invitations array that it will change the status
 
@@ -14,8 +12,9 @@ class User {
   }
 
   bookSession(user, date, time) {
-    const session = new Tandem(user, this.language, date, time)
-    this.sessions.push(session)
+    const invitation = new Tandem(user, this.language, date, time)
+    invitation.status = 'sent'
+    this.invitations.push(invitation)
   }
 
   addAvailability(date, time) {
@@ -23,21 +22,29 @@ class User {
   }
 
   removeAvailability(date, time) {
-    this.availability.pop({ date, time })
+    this.availability = this.availability.filter(avail => avail.date !== date || avail.time !== time)
   }
 
-  invite(user, date, time) {
-    const invitation = new Tandem(user, this.language, date, time)
-    user.invitationsToConfirm.push(invitation)
-    this.invitationsSent.push(invitation)
-    // how to delete the invitation sent from the list, after other user confirmed?
+  acceptInvitation(invitation) {
+    invitation.status = 'accepted'
+    this.sessions.push(new Tandem(invitation.user, invitation.language, invitation.date, invitation.time))
+    this.invitations = this.invitations.filter(invite => invite !== invitation)
   }
 
-  acceptInvitation(user, date, time) {
-    this.bookSession(user, date, time)
-    this.removeAvailability(date, time)
-    this.invitationsToConfirm.pop()
-    this.invitationsAccepted.push({ user, date, time })
+  get details() {
+    return {
+      name: this.name,
+      language: this.language,
+      sessions: this.sessions,
+      invitations: this.invitations.map(invitation => ({
+        user: invitation.user,
+        language: invitation.language,
+        date: invitation.date,
+        time: invitation.time,
+        status: invitation.status,
+      })),
+      availability: this.availability,
+    }
   }
 }
 
