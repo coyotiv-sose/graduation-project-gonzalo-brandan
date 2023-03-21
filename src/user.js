@@ -26,25 +26,41 @@ class User {
   }
 
   acceptInvitation(invitation) {
+    // accepted invitations are not being added to the sessions array
     invitation.status = 'accepted'
-    this.sessions.push(new Tandem(invitation.user, invitation.language, invitation.date, invitation.time))
+    const session = new Tandem(this, invitation.language, invitation.date, invitation.time)
+    this.sessions.push(session)
     this.invitations = this.invitations.filter(invite => invite !== invitation)
   }
 
   get details() {
-    return {
-      name: this.name,
-      language: this.language,
-      sessions: this.sessions,
-      invitations: this.invitations.map(invitation => ({
-        user: invitation.user,
-        language: invitation.language,
-        date: invitation.date,
-        time: invitation.time,
-        status: invitation.status,
-      })),
-      availability: this.availability,
-    }
+    return `
+Name: ${this.name}
+Language: ${this.language}
+Sessions:
+${this.sessions
+  .map(
+    session => `
+- ${session.user.name} (${session.language}) on ${session.date} at ${session.time}`
+  )
+  .join('')}
+
+Invitations:
+${this.invitations
+  .map(
+    invitation => `
+- ${invitation.user.name} (${invitation.language}) on ${invitation.date} at ${invitation.time} (${invitation.status})`
+  )
+  .join('')}
+
+Availability:
+${this.availability
+  .map(
+    avail => `
+- ${avail.date} at ${avail.time}`
+  )
+  .join('')}
+`
   }
 }
 

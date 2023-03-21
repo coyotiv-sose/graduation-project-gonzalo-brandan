@@ -7,13 +7,17 @@ class Tandem {
   }
 
   get details() {
-    //task of today: implement profiles!
-    return {
-      date: this.date,
-      language: this.language,
-      users: this.users, // how to get the name of both users?
-      time: this.time,
-    }
+    // problem is that I am getting only 1 participant
+    return `
+# Tandem Details
+## ${this.date} at ${this.time}
+
+Language: ${this.language}
+
+Participants:
+- ${this.user.name}
+
+`
   }
 }
 

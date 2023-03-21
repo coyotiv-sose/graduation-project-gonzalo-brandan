@@ -1,3 +1,4 @@
+const Tandem = require('./tandem')
 const User = require('./user')
 
 console.log("Hi coyote, let's have some JavaScript fun!")
@@ -18,8 +19,8 @@ console.log('Lingolink is a tandem language learning app for german and spanish'
 // I need to be able to see my availability updated after booking a session
 // You have to earn points giving sessions and receiving sessions
 
-const gonzalo = new User('Gonzalo')
-const maria = new User('Maria')
+const gonzalo = new User('Gonzalo', 'spanish')
+const maria = new User('Maria', 'german')
 
 gonzalo.bookSession(maria, '2020-01-01', '12:00')
 //console.log(`gonzalo's sessions: ${gonzalo.sessions.length === 1}`)
@@ -44,4 +45,9 @@ maria.acceptInvitation(gonzalo.invitations[0])
 // console.log(maria)
 
 // how to get the details of gonzalo using getters?
+console.log('#'.repeat(50))
 console.log(gonzalo.details)
+console.log('#'.repeat(50))
+console.log(maria.details)
+console.log('#'.repeat(50))
+console.log(maria.sessions[0].details)
