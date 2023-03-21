@@ -52,7 +52,9 @@
           "enable": true
         },
         "eslint.format.enable": true,
-        "eslint.options": {},
+        "eslint.options": {
+          
+        },
         "plantuml.server": "http://localhost:8080",
         "plantuml.render": "PlantUMLServer",
         "terminal.integrated.tabs.enabled": true,
