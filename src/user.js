@@ -1,20 +1,19 @@
 const Tandem = require('./tandem')
 
 class User {
-  language = ''
-  sessions = []
-  invitations = []
+  //language = ''
+  tandems = []
   availability = []
-  // status changing in invitation so I create only one invitations array that it will change the status
 
-  constructor(name) {
+  constructor(name, targetLanguage, offeredLanguage) {
     this.name = name
+    this.targetLanguage = targetLanguage
+    this.offeredLanguage = offeredLanguage
   }
 
-  bookSession(user, date, time) {
-    const invitation = new Tandem(user, this.language, date, time)
-    invitation.status = 'sent'
-    this.invitations.push(invitation)
+  bookSession(partner, date, time) {
+    const tandem = new Tandem(this, partner, this.language, date, time)
+    this.tandems.push(tandem)
   }
 
   addAvailability(date, time) {
@@ -25,31 +24,23 @@ class User {
     this.availability = this.availability.filter(avail => avail.date !== date || avail.time !== time)
   }
 
-  acceptInvitation(invitation) {
-    // accepted invitations are not being added to the sessions array
-    invitation.status = 'accepted'
-    const session = new Tandem(this, invitation.language, invitation.date, invitation.time)
-    this.sessions.push(session)
-    this.invitations = this.invitations.filter(invite => invite !== invitation)
+  acceptInvitation(tandem) {
+    tandem.status = 'accepted'
+    const session = new Tandem(this, tandem.user, tandem.language, tandem.date, tandem.time)
+    this.tandems.push(session)
+    this.tandems = this.tandems.filter(tandemItem => tandemItem !== tandem)
   }
 
   get details() {
     return `
 Name: ${this.name}
-Language: ${this.language}
-Sessions:
-${this.sessions
+Wants: ${this.targetLanguage}
+Offers: ${this.offeredLanguage}
+Tandems:
+${this.tandems
   .map(
-    session => `
-- ${session.user.name} (${session.language}) on ${session.date} at ${session.time}`
-  )
-  .join('')}
-
-Invitations:
-${this.invitations
-  .map(
-    invitation => `
-- ${invitation.user.name} (${invitation.language}) on ${invitation.date} at ${invitation.time} (${invitation.status})`
+    tandem => `
+- ${tandem.user.name} and ${tandem.partner.name} (${tandem.language}) on ${tandem.date} at ${tandem.time} (${tandem.status})`
   )
   .join('')}
 
