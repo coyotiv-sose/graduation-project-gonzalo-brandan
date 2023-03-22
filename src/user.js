@@ -11,8 +11,9 @@ class User {
     this.offeredLanguage = offeredLanguage
   }
 
-  bookSession(partner, date, time) {
-    const tandem = new Tandem(this, partner, this.language, date, time)
+  bookSession(partner, language, date, time) {
+    const tandem = new Tandem(this, partner, language, date, time)
+    tandem.status = 'sent'
     this.tandems.push(tandem)
   }
 
@@ -26,9 +27,6 @@ class User {
 
   acceptInvitation(tandem) {
     tandem.status = 'accepted'
-    const session = new Tandem(this, tandem.user, tandem.language, tandem.date, tandem.time)
-    this.tandems.push(session)
-    this.tandems = this.tandems.filter(tandemItem => tandemItem !== tandem)
   }
 
   get details() {

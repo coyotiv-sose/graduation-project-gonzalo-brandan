@@ -1,5 +1,5 @@
 class Tandem {
-  constructor(user, partner, language, date, time, status = 'sent') {
+  constructor(user, partner, language, date, time, status) {
     this.date = date
     this.language = language
     this.user = user
