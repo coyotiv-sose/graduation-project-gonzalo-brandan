@@ -1,13 +1,14 @@
 class Tandem {
-  constructor(user, language, date, time) {
+  constructor(user, partner, language, date, time, status = 'sent') {
     this.date = date
     this.language = language
     this.user = user
+    this.partner = partner
     this.time = time
+    this.status = status // added status property
   }
 
   get details() {
-    // problem is that I am getting only 1 participant
     return `
 # Tandem Details
 ## ${this.date} at ${this.time}
@@ -16,6 +17,7 @@ Language: ${this.language}
 
 Participants:
 - ${this.user.name}
+- ${this.partner.name}
 
 `
   }
