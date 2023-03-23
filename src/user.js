@@ -1,7 +1,6 @@
 const Tandem = require('./tandem')
 
 class User {
-  //language = ''
   tandems = []
   availability = []
 
@@ -13,8 +12,10 @@ class User {
 
   bookSession(partner, language, date, time) {
     const tandem = new Tandem(this, partner, language, date, time)
-    tandem.status = 'sent'
+    tandem.status = 'initiated' //initiated
+    //tandem.partner.status = 'received' // I am having to change the status of the partner to received, it should not be necessary
     this.tandems.push(tandem)
+    partner.tandems.push(tandem)
   }
 
   addAvailability(date, time) {
@@ -30,26 +31,27 @@ class User {
   }
 
   get details() {
-    return `
-Name: ${this.name}
+    return `Name: ${this.name}
 Wants: ${this.targetLanguage}
 Offers: ${this.offeredLanguage}
-Tandems:
-${this.tandems
-  .map(
-    tandem => `
-- ${tandem.user.name} and ${tandem.partner.name} (${tandem.language}) on ${tandem.date} at ${tandem.time} (${tandem.status})`
-  )
-  .join('')}
+Tandems:\n${this.tandems
+      .map(tandem => {
+        let status = tandem.status
 
-Availability:
-${this.availability
-  .map(
-    avail => `
-- ${avail.date} at ${avail.time}`
-  )
-  .join('')}
-`
+        if (status === 'initiated') {
+          if (this === tandem.user) {
+            status = 'sent'
+          } else {
+            status = 'received'
+          }
+        } else if (status === 'accepted') {
+          status = 'accepted'
+        }
+
+        return `- ${tandem.user.name} and ${tandem.partner.name} (${tandem.language}) on ${tandem.date} at ${tandem.time} (${status})`
+      })
+      .join('\n')}
+Availability:\n${this.availability.map(avail => `- ${avail.date} at ${avail.time}`).join('\n')}`
   }
 }
 

@@ -18,6 +18,9 @@ console.log('Lingolink is a tandem language learning app for german and spanish'
 // I need to be able to see my availability updated after accepting or declining an invitation
 // I need to be able to see my availability updated after booking a session
 // You have to earn points giving sessions and receiving sessions
+// user has composition relationship with tandems, if user is deleted, tandems are deleted
+// user has composition relationship with availability, if user is deleted, availability is deleted
+// user has aggregation relationship with ratings, if user is deleted, ratings are not deleted
 
 const gonzalo = new User('Gonzalo', 'German', 'Spanish')
 const maria = new User('Maria', 'Spanish', 'German')
@@ -59,3 +62,7 @@ const tandemSession = gonzalo.tandems
       (tandem.user === gonzalo && tandem.partner === maria) || (tandem.user === maria && tandem.partner === gonzalo)
   )
 console.log(tandemSession.details)
+
+console.log('#'.repeat(50))
+// console how many tandems maria has received
+console.log(`Maria has received ${maria.tandems.length} tandems`)
