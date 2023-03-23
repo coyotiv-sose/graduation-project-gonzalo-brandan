@@ -29,27 +29,14 @@ gonzalo.bookSession(maria, 'German', '2020-01-01', '12:00')
 console.log(`gonzalo's tandems: ${gonzalo.tandems.length === 1}`)
 
 gonzalo.bookSession(maria, 'Spanish', '2020-01-01', '19:00')
-console.log(`gonzalo's tandems: ${gonzalo.tandems.length === 2}`)
-
-gonzalo.addAvailability('2020-01-01', '12:00')
-console.log(`gonzalo's availability: ${gonzalo.availability.length === 1}`)
-
-gonzalo.addAvailability('2020-01-01', '14:00')
-gonzalo.removeAvailability('2020-01-01', '14:00')
-
 gonzalo.bookSession(maria, 'German', '2020-01-02', '14:00')
-console.log(`gonzalo's tandems: ${gonzalo.tandems.length === 3}`)
-console.log(`gonzalo's availability: ${gonzalo.availability.length === 1}`)
-
 gonzalo.bookSession(maria, 'Spanish', '2020-01-03', '16:00')
-console.log(`gonzalo's invitations: ${gonzalo.tandems.length === 4}`)
 
 maria.acceptInvitation(gonzalo.tandems[3])
-console.log(`gonzalo's invitations: ${gonzalo.tandems.length === 3}`)
-console.log(`gonzalo's availability: ${gonzalo.availability.length === 0}`)
-
 maria.bookSession(gonzalo, 'Spanish', '2020-01-10', '18:00')
-gonzalo.acceptInvitation(maria.tandems[0]) //I am having to accept the invitation from maria to gonzalo to change that value, it should not be necessary
+
+gonzalo.declineInvitation(maria.tandems[0]) //I am having to accept the invitation from maria to gonzalo to change that value, it should not be necessary
+
 console.log('#'.repeat(50))
 console.log(gonzalo.details)
 console.log('#'.repeat(50))

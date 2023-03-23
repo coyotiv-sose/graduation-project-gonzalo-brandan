@@ -30,6 +30,10 @@ class User {
     tandem.status = 'accepted'
   }
 
+  declineInvitation(tandem) {
+    tandem.status = 'declined'
+  }
+
   get details() {
     return `Name: ${this.name}
 Wants: ${this.targetLanguage}
