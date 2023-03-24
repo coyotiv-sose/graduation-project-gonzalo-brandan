@@ -56,12 +56,6 @@ Tandems:\n${this.tandems
           } else {
             status = 'received'
           }
-        } else if (status === 'accepted') {
-          status = 'accepted'
-        } else if (status === 'cancelled') {
-          status = 'cancelled'
-        } else if (status === 'declined') {
-          status = 'declined'
         }
 
         return `- ${tandem.user.name} and ${tandem.partner.name} (${tandem.language}) on ${tandem.date} at ${tandem.time} (${status})`
