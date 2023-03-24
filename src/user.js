@@ -3,6 +3,7 @@ const Tandem = require('./tandem')
 class User {
   tandems = []
   availability = []
+  ratings = [5]
 
   constructor(name, targetLanguage, offeredLanguage) {
     this.name = name
@@ -30,7 +31,7 @@ class User {
     const { date } = tandem
     const { user, partner } = tandem
     ;[user, partner].forEach(u => {
-      u.availability = u.availability.filter(avail => avail.date !== date)
+      u.availability = u.availability.filter(avail => avail.date !== date) // remove availability for that date
     })
   }
 
@@ -42,7 +43,13 @@ class User {
     tandem.status = 'cancelled'
   }
 
-  get pendingInvitations() {
+  rateUser(user, rating) {
+    user.ratings.push(rating)
+    const averageRating = user.ratings.reduce((sum, rating) => sum + rating, 0) / user.ratings.length
+    user.rating = averageRating.toFixed(1)
+  }
+
+  get pendingAcceptanceTandems() {
     return this.tandems.filter(tandem => tandem.status === 'initiated' && tandem.partner === this)
   }
 
@@ -50,6 +57,7 @@ class User {
     return `Name: ${this.name}
 Wants: ${this.targetLanguage}
 Offers: ${this.offeredLanguage}
+Rating: ${this.rating}
 Tandems:\n${this.tandems
       .map(tandem => {
         let status = tandem.status
@@ -65,7 +73,8 @@ Tandems:\n${this.tandems
         return `- ${tandem.user.name} and ${tandem.partner.name} (${tandem.language}) on ${tandem.date} at ${tandem.time} (${status})`
       })
       .join('\n')}
-Availability:\n${this.availability.map(avail => `- ${avail.date} at ${avail.time}`).join('\n')}`
+Availability:\n${this.availability.map(avail => `- ${avail.date} at ${avail.time}`).join('\n')}
+Matching Availabilities:`
   }
 }
 
