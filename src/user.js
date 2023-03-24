@@ -34,6 +34,10 @@ class User {
     tandem.status = 'declined'
   }
 
+  cancelSession(tandem) {
+    tandem.status = 'cancelled'
+  }
+
   get details() {
     return `Name: ${this.name}
 Wants: ${this.targetLanguage}
