@@ -42,6 +42,10 @@ class User {
     tandem.status = 'cancelled'
   }
 
+  get pendingInvitations() {
+    return this.tandems.filter(tandem => tandem.status === 'initiated' && tandem.partner === this)
+  }
+
   get details() {
     return `Name: ${this.name}
 Wants: ${this.targetLanguage}
