@@ -12,8 +12,7 @@ class User {
 
   bookSession(partner, language, date, time) {
     const tandem = new Tandem(this, partner, language, date, time)
-    tandem.status = 'initiated' //initiated
-    //tandem.partner.status = 'received' // I am having to change the status of the partner to received, it should not be necessary
+    tandem.status = 'initiated'
     this.tandems.push(tandem)
     partner.tandems.push(tandem)
   }
@@ -28,6 +27,11 @@ class User {
 
   acceptInvitation(tandem) {
     tandem.status = 'accepted'
+    const { date } = tandem
+    const { user, partner } = tandem
+    ;[user, partner].forEach(u => {
+      u.availability = u.availability.filter(avail => avail.date !== date)
+    })
   }
 
   declineInvitation(tandem) {
@@ -54,6 +58,10 @@ Tandems:\n${this.tandems
           }
         } else if (status === 'accepted') {
           status = 'accepted'
+        } else if (status === 'cancelled') {
+          status = 'cancelled'
+        } else if (status === 'declined') {
+          status = 'declined'
         }
 
         return `- ${tandem.user.name} and ${tandem.partner.name} (${tandem.language}) on ${tandem.date} at ${tandem.time} (${status})`
