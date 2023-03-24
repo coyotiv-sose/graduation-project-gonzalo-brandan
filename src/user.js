@@ -3,7 +3,8 @@ const Tandem = require('./tandem')
 class User {
   tandems = []
   availability = []
-  ratings = [5]
+  ratings = []
+  rating = 5
 
   constructor(name, targetLanguage, offeredLanguage) {
     this.name = name
