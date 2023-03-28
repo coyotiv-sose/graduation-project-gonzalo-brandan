@@ -1,6 +1,33 @@
-@startuml Person 
-class Person {
-  name: string
-  age: number
+@startuml
+class User {
+  tandems: Tandem[]
+  availability: { date: string, time: string }[]
+  ratings: number[]
+  rating: number = 5
+  constructor(name: string, targetLanguage: string, offeredLanguage: string)
+  bookSession(partner: User, language: string, date: string, time: string): void
+  addAvailability(date: string, time: string): void
+  removeAvailability(date: string, time: string): void
+  acceptInvitation(tandem: Tandem): void
+  declineInvitation(tandem: Tandem): void
+  cancelSession(tandem: Tandem): void
+  rateUser(user: User, rating: number): void
+  get pendingAcceptanceTandems(): Tandem[]
+  get details(): string
 }
+
+class Tandem {
+  user: User
+  partner: User
+  language: string
+  date: string
+  time: string
+  status: string
+  constructor(user: User, partner: User, language: string, date: string, time: string, status: string)
+  get details(): string
+}
+
+User "0..*"--> Tandem: has tandems
+Tandem --> User: user
+Tandem --> User: partner
 @enduml

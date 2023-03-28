@@ -1,0 +1,12 @@
+@startuml
+
+[*] -> SelectDateTime
+SelectDateTime -> CheckAvailability: Submit
+CheckAvailability -> SessionAvailable: Partner available
+CheckAvailability -> SessionUnavailable: Partner not available
+SessionAvailable -> SendInvitation: Send invitation
+SendInvitation -> BookSession: User accepts
+BookSession -> SessionBooked: Session booked
+SessionUnavailable -> SessionNotAvailable: Session not available
+
+@enduml

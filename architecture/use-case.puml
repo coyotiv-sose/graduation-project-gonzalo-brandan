@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor User
+
+rectangle "Tandem Session" {
+  usecase "Book Session" as UC1
+  usecase "Accept Invitation" as UC2
+  usecase "Decline Invitation" as UC3
+  usecase "Cancel Session" as UC4
+}
+
+User --> UC1
+UC1 --> UC2
+UC1 --> UC3
+
+@enduml

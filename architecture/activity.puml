@@ -1,0 +1,11 @@
+@startuml
+start
+:User selects date and time;
+if (Partner available?) then (yes)
+  :Partner accepts session;
+  :Session booked;
+else (no)
+  :Session not available;
+endif
+stop
+@enduml
