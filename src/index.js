@@ -3,13 +3,9 @@ const User = require('./user')
 
 console.log('Lingolink is a language exchange platform')
 
-// I need to be able to create an user
-// I need to be able to book a session +
-// I need to be able to cancel a session +
+// I need to be able to create an user+
 // I need to be able to see all my sessions
 // I need to see other users
-// I need to see other users that match my availability and language
-// I need to be able to rate a user
 // I need to be able to see all my pending invitations +
 // I need to be able to accept an invitation +
 // I need to be able to decline an invitation +
@@ -41,11 +37,17 @@ maria.bookSession(gonzalo, 'Spanish', '2020-01-10', '18:00')
 maria.acceptInvitation(gonzalo.tandems[3])
 //gonzalo.declineInvitation(maria.tandems[0])
 //maria.cancelSession(gonzalo.tandems[3])
-
+// rename methods for consistency
+// end session?
+// rate sessions after completed. If not completed, no rating.
+// send message to user after session? hey did you complete the session? rate it if yes
+// after endSession, add messaging system where gonzalo add comment into session, not to maria.
 maria.rateUser(gonzalo, 4)
 maria.rateUser(gonzalo, 5)
 //gonzalo.rateUser(maria, 1)
 //gonzalo.rateUser(maria, 4)
+
+console.log('#'.repeat(50))
 console.log(`maria has received ${maria.ratings.length} ratings`)
 console.log('#'.repeat(50))
 console.log(gonzalo.details)

@@ -5,12 +5,35 @@ class User {
   availability = []
   ratings = []
   rating = 5
+  matchedAvailabilities = []
 
   constructor(name, targetLanguage, offeredLanguage) {
     this.name = name
     this.targetLanguage = targetLanguage
     this.offeredLanguage = offeredLanguage
   }
+
+  // findMatchedAvailabilities(user, partner) {
+  //   const { targetLanguage, offeredLanguage } = user
+  //   const matchedAvailabilities = this.availability.filter(avail => {
+  //     const { date, time } = avail
+  //     const userAvailable = user.availability.some(avail => avail.date === date && avail.time === time)
+  //     const partnerAvailable = partner.availability.some(avail => avail.date === date && avail.time === time)
+  //     return (
+  //       !user.tandems.some(tandem => tandem.date === date && tandem.time === time) &&
+  //       !partner.tandems.some(tandem => tandem.date === date && tandem.time === time) &&
+  //       userAvailable &&
+  //       partnerAvailable &&
+  //       (targetLanguage === partner.offeredLanguage || offeredLanguage === partner.offeredLanguage)
+  //     )
+  //   })
+  //   console.log('Matched availabilities:', matchedAvailabilities)
+  //   this.matchedAvailabilities.push(...matchedAvailabilities)
+  // }
+
+  // getMatchedAvailabilities() {
+  //   return this.matchedAvailabilities
+  // }
 
   bookSession(partner, language, date, time) {
     const tandem = new Tandem(this, partner, language, date, time)
