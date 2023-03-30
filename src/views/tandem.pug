@@ -1,0 +1,14 @@
+extends layout
+
+block content
+h1 Tandems
+p Welcome to #{title}
+p Here is all the tandems that are currently created.
+
+ul
+  each tandem in tandems
+    li
+      a(href='/tandem/' + tandem.id)= tandem.name
+      p
+      | participants : #{tandem.participants.length}
+      | date and time: #{tandem.date} #{tandem.time}
