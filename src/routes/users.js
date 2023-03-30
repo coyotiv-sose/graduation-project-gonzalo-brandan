@@ -54,4 +54,10 @@ router.post('/', function (req, res, next) {
 
 /* create a tandem for a user */
 
+router.post('/:userId/tandems', function (req, res, next) {
+  const tandem = user.createTandem(req.body.partner, req.body.language, req.body.date, req.body.time)
+
+  res.send(tandem)
+})
+
 module.exports = router

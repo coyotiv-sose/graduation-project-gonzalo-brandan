@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h2= tandem.user + 's tandem'
+
+  p
+  | time and date: #{tandem.date} #{tandem.time}
+  | partner: #{tandem.partner}
+
+  ul
+    each participant in tandem.participants
+      li= participant
