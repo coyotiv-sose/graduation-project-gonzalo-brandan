@@ -21,6 +21,15 @@ Participants:
 
 `
   }
-}
 
+  static create({ user, partner, language, date, time, status }) {
+    const tandem = new Tandem(user, partner, language, date, time, 'initiated')
+
+    Tandem.list.push(tandem)
+
+    return tandem
+  }
+
+  static list = []
+}
 module.exports = Tandem

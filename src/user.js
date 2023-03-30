@@ -13,28 +13,6 @@ class User {
     this.offeredLanguage = offeredLanguage
   }
 
-  // findMatchedAvailabilities(user, partner) {
-  //   const { targetLanguage, offeredLanguage } = user
-  //   const matchedAvailabilities = this.availability.filter(avail => {
-  //     const { date, time } = avail
-  //     const userAvailable = user.availability.some(avail => avail.date === date && avail.time === time)
-  //     const partnerAvailable = partner.availability.some(avail => avail.date === date && avail.time === time)
-  //     return (
-  //       !user.tandems.some(tandem => tandem.date === date && tandem.time === time) &&
-  //       !partner.tandems.some(tandem => tandem.date === date && tandem.time === time) &&
-  //       userAvailable &&
-  //       partnerAvailable &&
-  //       (targetLanguage === partner.offeredLanguage || offeredLanguage === partner.offeredLanguage)
-  //     )
-  //   })
-  //   console.log('Matched availabilities:', matchedAvailabilities)
-  //   this.matchedAvailabilities.push(...matchedAvailabilities)
-  // }
-
-  // getMatchedAvailabilities() {
-  //   return this.matchedAvailabilities
-  // }
-
   bookSession(partner, language, date, time) {
     const tandem = new Tandem(this, partner, language, date, time)
     tandem.status = 'initiated'
@@ -97,9 +75,18 @@ Tandems:\n${this.tandems
         return `- ${tandem.user.name} and ${tandem.partner.name} (${tandem.language}) on ${tandem.date} at ${tandem.time} (${status})`
       })
       .join('\n')}
-Availability:\n${this.availability.map(avail => `- ${avail.date} at ${avail.time}`).join('\n')}
-Matching Availabilities:`
+Availability:\n${this.availability.map(avail => `- ${avail.date} at ${avail.time}`).join('\n')}`
   }
+
+  static create({ name, targetLanguage, offeredLanguage }) {
+    const newUser = new User(name, targetLanguage, offeredLanguage)
+
+    User.list.push(newUser)
+
+    return newUser
+  }
+
+  static list = []
 }
 
 module.exports = User
