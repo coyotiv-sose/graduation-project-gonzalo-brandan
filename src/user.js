@@ -100,6 +100,15 @@ Tandems:\n${this.tandems
 Availability:\n${this.availability.map(avail => `- ${avail.date} at ${avail.time}`).join('\n')}
 Matching Availabilities:`
   }
+
+  static create({ name }) {
+    const newUser = new User(name)
+
+    User.list.push(newUser)
+    return newUser
+  }
+
+  static list = []
 }
 
 module.exports = User

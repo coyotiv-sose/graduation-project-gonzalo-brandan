@@ -1,4 +1,8 @@
 extends layout
 
 block content
-  h1 Users
+  h1 Users Page
+  h2 Welcome #{user.name}
+  ul
+    each user in users
+      li= user.name
