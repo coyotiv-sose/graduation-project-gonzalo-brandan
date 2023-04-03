@@ -21,14 +21,12 @@ console.log('Lingolink is a language exchange platform')
 async function main() {
   const gonzalo = await axios.post('http://localhost:3000/users', {
     name: 'Gonzalo',
+    hacked: true,
   })
 
   const maria = await axios.post('http://localhost:3000/users', {
     name: 'Maria',
   })
-
-  console.log(gonzalo.data)
-  console.log(maria.data)
 
   const allUsers = await axios.get('http://localhost:3000/users')
 

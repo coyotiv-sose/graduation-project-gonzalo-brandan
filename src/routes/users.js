@@ -5,10 +5,9 @@ const User = require('../user')
 var users = [{ name: 'Jane' }, { name: 'John' }, { name: 'Jack' }]
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-  res.send(users)
+  res.send(User.list)
 
-  return
-
+  return //empty list if return is uncommented
   res.render('users', {
     user: {
       name: 'Jane',
@@ -24,7 +23,8 @@ router.get('/:userId', function (req, res, next) {
 
 // create a new user
 router.post('/', function (req, res, next) {
-  const user = new User(req.body.name)
+  //const user = new User(req.body.name)
+  const user = User.create({ name: req.body.name })
   res.send(user)
 })
 
