@@ -31,10 +31,21 @@ async function main() {
   const allUsers = await axios.get('http://localhost:3000/users')
 
   console.log('List of all users', allUsers.data)
+
+  const gonzaloTandem = await axios.post('http://localhost:3000/tandems', {
+    user: gonzalo.data.name,
+    partner: maria.data.name,
+    language: 'Spanish',
+    date: '2020-01-01',
+    time: '12:00',
+  })
+
+  console.log(gonzaloTandem.data)
 }
 
 main()
 
+//name change session to tandems
 // const gonzalo = new User('Gonzalo', 'German', 'Spanish')
 // const maria = new User('Maria', 'Spanish', 'German')
 // //

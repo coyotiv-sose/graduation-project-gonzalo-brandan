@@ -2,23 +2,14 @@ var express = require('express')
 var router = express.Router()
 const User = require('../user')
 
-var users = [{ name: 'Jane' }, { name: 'John' }, { name: 'Jack' }]
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   res.send(User.list)
-
-  return //empty list if return is uncommented
-  res.render('users', {
-    user: {
-      name: 'Jane',
-    },
-    users: [{ name: 'Jane' }, { name: 'John' }, { name: 'Jack' }],
-  })
 })
 
 // get a specific user by index
 router.get('/:userId', function (req, res, next) {
-  res.send(users[req.params.userId])
+  res.send(User.list[req.params.userId])
 })
 
 // create a new user

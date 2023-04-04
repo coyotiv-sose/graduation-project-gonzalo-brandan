@@ -6,7 +6,7 @@ var logger = require('morgan')
 
 var indexRouter = require('./routes/index')
 var usersRouter = require('./routes/users')
-//var tandemRouter = require('./routes/tandem') // import the tandemRouter
+var tandemsRouter = require('./routes/tandems') // import the tandemRouter
 
 var app = express()
 
@@ -21,7 +21,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter) //
-//app.use('/tandem', tandemRouter) // when the path is /tandem, use the tandemRouter
+app.use('/tandems', tandemsRouter) // when the path is /tandem, use the tandemRouter
 app.use('/users', usersRouter) // when the path is /users, use the usersRouter
 // usersRouter is defined in src/routes/users.js
 // catch 404 and forward to error handler
@@ -31,6 +31,7 @@ app.use(function (req, res, next) {
 
 // error handler
 app.use(function (err, req, res, next) {
+  console.log(err)
   // set locals, only providing error in development
   res.locals.message = err.message
   res.locals.error = req.app.get('env') === 'development' ? err : {}

@@ -36,7 +36,7 @@ class User {
   // }
 
   bookSession(partner, language, date, time) {
-    const tandem = new Tandem(this, partner, language, date, time)
+    const tandem = Tandem.create({ user: this, partner, language, date, time })
     tandem.status = 'initiated'
     this.tandems.push(tandem)
     partner.tandems.push(tandem)
