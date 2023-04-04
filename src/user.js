@@ -35,7 +35,7 @@ class User {
   //   return this.matchedAvailabilities
   // }
 
-  bookSession(partner, language, date, time) {
+  initiateTandem(partner, language, date, time) {
     const tandem = Tandem.create({ user: this, partner, language, date, time })
     tandem.status = 'initiated'
     this.tandems.push(tandem)
@@ -50,7 +50,7 @@ class User {
     this.availability = this.availability.filter(avail => avail.date !== date || avail.time !== time)
   }
 
-  acceptInvitation(tandem) {
+  acceptTandem(tandem) {
     tandem.status = 'accepted'
     const { date } = tandem
     const { user, partner } = tandem
@@ -59,11 +59,11 @@ class User {
     })
   }
 
-  declineInvitation(tandem) {
+  declineTandem(tandem) {
     tandem.status = 'declined'
   }
 
-  cancelSession(tandem) {
+  cancelTandem(tandem) {
     tandem.status = 'cancelled'
   }
 

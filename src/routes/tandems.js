@@ -26,7 +26,7 @@ router.post('/', function (req, res, next) {
   // })
   const user = User.list.find(user => user.name === req.body.user)
   const partner = User.list.find(user => user.name === req.body.partner)
-  user.bookSession(partner, req.body.language, req.body.date, req.body.time)
+  user.initiateTandem(partner, req.body.language, req.body.date, req.body.time)
 
   res.send({
     name: user.name,
