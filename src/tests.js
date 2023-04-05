@@ -1,6 +1,6 @@
 const axios = require('axios')
-const Tandem = require('./tandem')
-const User = require('./user')
+const Tandem = require('./models/tandem')
+const User = require('./models/user')
 
 axios.defaults.baseURL = 'http://localhost:3000'
 
