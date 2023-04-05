@@ -3,10 +3,9 @@ var router = express.Router()
 const User = require('../user')
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-  const users = User.find().then(users => {
-    res.send(users)
-  })
+router.get('/', async function (req, res, next) {
+  const users = await User.find()
+  res.send(users)
 })
 
 // get a specific user by index
