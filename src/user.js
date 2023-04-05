@@ -1,4 +1,32 @@
 const Tandem = require('./tandem')
+const mongoose = require('mongoose')
+
+const userSchema = new mongoose.Schema({
+  name: String,
+  targetLanguage: String,
+  offeredLanguage: String,
+  tandems: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Tandem',
+    },
+  ],
+  availability: [
+    {
+      date: String,
+      time: String,
+    },
+  ],
+  ratings: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Rating',
+    },
+  ],
+  rating: Number,
+})
+
+module.exports = mongoose.model('User', userSchema)
 
 class User {
   tandems = []
@@ -42,14 +70,6 @@ class User {
     partner.tandems.push(tandem)
   }
 
-  addAvailability(date, time) {
-    this.availability.push({ date, time })
-  }
-
-  removeAvailability(date, time) {
-    this.availability = this.availability.filter(avail => avail.date !== date || avail.time !== time)
-  }
-
   acceptTandem(tandem) {
     tandem.status = 'accepted'
     const { date } = tandem
@@ -67,14 +87,22 @@ class User {
     tandem.status = 'cancelled'
   }
 
+  get pendingAcceptanceTandems() {
+    return this.tandems.filter(tandem => tandem.status === 'initiated' && tandem.partner === this)
+  }
+
   rateUser(user, rating) {
     user.ratings.push(rating)
     const averageRating = user.ratings.reduce((sum, rating) => sum + rating, 0) / user.ratings.length
     user.rating = averageRating.toFixed(1)
   }
 
-  get pendingAcceptanceTandems() {
-    return this.tandems.filter(tandem => tandem.status === 'initiated' && tandem.partner === this)
+  addAvailability(date, time) {
+    this.availability.push({ date, time })
+  }
+
+  removeAvailability(date, time) {
+    this.availability = this.availability.filter(avail => avail.date !== date || avail.time !== time)
   }
 
   get details() {
@@ -111,4 +139,4 @@ Matching Availabilities:`
   static list = []
 }
 
-module.exports = User
+//module.exports = User

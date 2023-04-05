@@ -2,6 +2,8 @@ const axios = require('axios')
 const Tandem = require('./tandem')
 const User = require('./user')
 
+axios.defaults.baseURL = 'http://localhost:3000'
+
 console.log('Lingolink is a language exchange platform')
 
 // I need to be able to create an user+
@@ -21,26 +23,25 @@ console.log('Lingolink is a language exchange platform')
 async function main() {
   const gonzalo = await axios.post('http://localhost:3000/users', {
     name: 'Gonzalo',
-    hacked: true,
   })
 
   const maria = await axios.post('http://localhost:3000/users', {
     name: 'Maria',
   })
 
-  const allUsers = await axios.get('http://localhost:3000/users')
+  //const allUsers = await axios.get('http://localhost:3000/users')
 
-  console.log('List of all users', allUsers.data)
+  //console.log('List of all users', allUsers.data)
 
-  const gonzaloTandem = await axios.post('http://localhost:3000/tandems', {
-    user: gonzalo.data.name,
-    partner: maria.data.name,
-    language: 'Spanish',
-    date: '2020-01-01',
-    time: '12:00',
-  })
+  // const gonzaloTandem = await axios.post('http://localhost:3000/tandems', {
+  //   user: gonzalo.data.name,
+  //   partner: maria.data.name,
+  //   language: 'Spanish',
+  //   date: '2020-01-01',
+  //   time: '12:00',
+  // })
 
-  console.log(gonzaloTandem.data)
+  // console.log(gonzaloTandem.data)
 }
 
 main()
