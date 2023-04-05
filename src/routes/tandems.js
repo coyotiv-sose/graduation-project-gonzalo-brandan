@@ -1,5 +1,5 @@
-var express = require('express')
-var router = express.Router()
+const express = require('express')
+const router = express.Router()
 const Tandem = require('../models/tandem')
 const User = require('../models/user')
 
@@ -13,17 +13,8 @@ router.get('/:tandemId', function (req, res, next) {
   res.send(Tandem.list[req.params.userId])
 })
 
-// create a new user
+// initiate a new tandem
 router.post('/', function (req, res, next) {
-  //const user = new User(req.body.name)
-  // const user = gonzalo.createTandem({
-  //   user: req.body.user,
-  //   partner: req.body.partner,
-  //   language: req.body.language,
-  //   date: req.body.date,
-  //   time: req.body.time,
-  //   status: req.body.status,
-  // })
   const user = User.list.find(user => user.name === req.body.user)
   const partner = User.list.find(user => user.name === req.body.partner)
   user.initiateTandem(partner, req.body.language, req.body.date, req.body.time)
