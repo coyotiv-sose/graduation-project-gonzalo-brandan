@@ -29,9 +29,8 @@ async function main() {
     name: 'Maria',
   })
 
-  //const allUsers = await axios.get('http://localhost:3000/users')
-
-  //console.log('List of all users', allUsers.data)
+  const allUsers = await axios.get('http://localhost:3000/users')
+  console.log('List of all users', allUsers.data)
 
   // const gonzaloTandem = await axios.post('http://localhost:3000/tandems', {
   //   user: gonzalo.data.name,
@@ -44,7 +43,7 @@ async function main() {
   // console.log(gonzaloTandem.data)
 }
 
-main()
+main().catch(err => console.log(error.data.message ? error.data.message : error))
 
 //name change session to tandems
 // const gonzalo = new User('Gonzalo', 'German', 'Spanish')
