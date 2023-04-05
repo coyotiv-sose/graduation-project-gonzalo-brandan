@@ -21,15 +21,15 @@ console.log('Lingolink is a language exchange platform')
 // create a leaderboard with people with more sessions given and received
 
 async function main() {
-  const gonzalo = await axios.post('http://localhost:3000/users', {
+  const gonzalo = await axios.post('/users', {
     name: 'Gonzalo',
   })
 
-  const maria = await axios.post('http://localhost:3000/users', {
+  const maria = await axios.post('/users', {
     name: 'Maria',
   })
 
-  const allUsers = await axios.get('http://localhost:3000/users')
+  const allUsers = await axios.get('/users?view=json')
   console.log('List of all users', allUsers.data)
 
   // const gonzaloTandem = await axios.post('http://localhost:3000/tandems', {
