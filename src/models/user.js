@@ -26,21 +26,7 @@ const userSchema = new mongoose.Schema({
   rating: Number,
 })
 
-module.exports = mongoose.model('User', userSchema)
-
 class User {
-  tandems = []
-  availability = []
-  ratings = []
-  rating = 5
-  matchedAvailabilities = []
-
-  constructor(name, targetLanguage, offeredLanguage) {
-    this.name = name
-    this.targetLanguage = targetLanguage
-    this.offeredLanguage = offeredLanguage
-  }
-
   initiateTandem(partner, language, date, time) {
     const tandem = Tandem.create({ user: this, partner, language, date, time })
     tandem.status = 'initiated'
@@ -85,9 +71,9 @@ class User {
 
   get details() {
     return `Name: ${this.name}
-Wants: ${this.targetLanguage}
-Offers: ${this.offeredLanguage}
-Rating: ${this.rating}
+    Wants: ${this.targetLanguage}
+    Offers: ${this.offeredLanguage}
+    Rating: ${this.rating}
 Tandems:\n${this.tandems
       .map(tandem => {
         let status = tandem.status
@@ -106,15 +92,6 @@ Tandems:\n${this.tandems
 Availability:\n${this.availability.map(avail => `- ${avail.date} at ${avail.time}`).join('\n')}
 Matching Availabilities:`
   }
-
-  static create({ name }) {
-    const newUser = new User(name)
-
-    User.list.push(newUser)
-    return newUser
-  }
-
-  static list = []
 }
 
-//module.exports = User
+module.exports = mongoose.model('User', userSchema)
