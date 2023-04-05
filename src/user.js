@@ -41,28 +41,6 @@ class User {
     this.offeredLanguage = offeredLanguage
   }
 
-  // findMatchedAvailabilities(user, partner) {
-  //   const { targetLanguage, offeredLanguage } = user
-  //   const matchedAvailabilities = this.availability.filter(avail => {
-  //     const { date, time } = avail
-  //     const userAvailable = user.availability.some(avail => avail.date === date && avail.time === time)
-  //     const partnerAvailable = partner.availability.some(avail => avail.date === date && avail.time === time)
-  //     return (
-  //       !user.tandems.some(tandem => tandem.date === date && tandem.time === time) &&
-  //       !partner.tandems.some(tandem => tandem.date === date && tandem.time === time) &&
-  //       userAvailable &&
-  //       partnerAvailable &&
-  //       (targetLanguage === partner.offeredLanguage || offeredLanguage === partner.offeredLanguage)
-  //     )
-  //   })
-  //   console.log('Matched availabilities:', matchedAvailabilities)
-  //   this.matchedAvailabilities.push(...matchedAvailabilities)
-  // }
-
-  // getMatchedAvailabilities() {
-  //   return this.matchedAvailabilities
-  // }
-
   initiateTandem(partner, language, date, time) {
     const tandem = Tandem.create({ user: this, partner, language, date, time })
     tandem.status = 'initiated'
