@@ -32,18 +32,27 @@ async function main() {
   const allUsers = await axios.get('/users?view=json')
   console.log('List of all users', allUsers.data)
 
-  // const gonzaloTandem = await axios.post('http://localhost:3000/tandems', {
-  //   user: gonzalo.data.name,
-  //   partner: maria.data.name,
-  //   language: 'Spanish',
-  //   date: '2020-01-01',
-  //   time: '12:00',
-  // })
+  const gonzaloTandem = await axios.post('/tandems', {
+    user: gonzalo.data._id,
+    partner: maria.data._id,
+    language: 'Spanish',
+    date: '2020-01-01',
+    time: '12:00',
+  })
+
+  //console.log(gonzaloTandem.data)
+  //const gonzaloTandem = await axios.post('http://localhost:3000/tandems', {
+  //  user: gonzalo.data.name,
+  //  partner: maria.data.name,
+  //  language: 'Spanish',
+  //  date: '2020-01-01',
+  //  time: '12:00',
+  //})
 
   // console.log(gonzaloTandem.data)
 }
 
-main().catch(err => console.log(error.data.message ? error.data.message : error))
+main().catch(error => console.log(error.message ? error.message : error))
 
 //name change session to tandems
 // const gonzalo = new User('Gonzalo', 'German', 'Spanish')
