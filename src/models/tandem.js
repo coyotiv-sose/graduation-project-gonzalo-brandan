@@ -8,6 +8,8 @@ class Tandem {
     this.status = status // added status property
   }
 
+  //get upcoming tandems
+
   get details() {
     return `
 # Tandem Details
