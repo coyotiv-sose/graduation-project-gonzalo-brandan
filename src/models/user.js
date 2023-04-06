@@ -1,5 +1,6 @@
 const Tandem = require('./tandem')
 const mongoose = require('mongoose')
+const autopopulate = require('mongoose-autopopulate')
 
 const userSchema = new mongoose.Schema({
   name: String,
@@ -9,6 +10,7 @@ const userSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Tandem',
+      autopopulate: { maxDepth: 1 },
     },
   ],
   availability: [
@@ -27,11 +29,15 @@ const userSchema = new mongoose.Schema({
 })
 
 class User {
-  initiateTandem(partner, language, date, time) {
-    const tandem = Tandem.create({ user: this, partner, language, date, time })
+  async initiateTandem(partner, language, date, time) {
+    const tandem = await Tandem.create({ user: this, partner: partner, language: language, date: date, time: time })
     tandem.status = 'initiated'
     this.tandems.push(tandem)
     partner.tandems.push(tandem)
+    await this.save()
+    await partner.save()
+
+    return tandem
   }
 
   acceptTandem(tandem) {
@@ -91,16 +97,8 @@ Tandems:\n${this.tandems
       .join('\n')}
 Availability:\n${this.availability.map(avail => `- ${avail.date} at ${avail.time}`).join('\n')}`
   }
-
-  static create({ name, targetLanguage, offeredLanguage }) {
-    const newUser = new User(name, targetLanguage, offeredLanguage)
-
-    User.list.push(newUser)
-
-    return newUser
-  }
-
-  static list = []
 }
+
+userSchema.loadClass(User) // add methods to schema
 
 module.exports = mongoose.model('User', userSchema)

@@ -1,15 +1,25 @@
+const mongoose = require('mongoose')
+const autopopulate = require('mongoose-autopopulate')
+
+const tandemSchema = new mongoose.Schema({
+  date: String,
+  language: String,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    autopopulate: { maxDepth: 1 },
+  },
+  partner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    autopopulate: { maxDepth: 1 },
+  },
+  time: String,
+  status: String,
+})
+
 class Tandem {
-  constructor(user, partner, language, date, time, status) {
-    this.date = date
-    this.language = language
-    this.user = user
-    this.partner = partner
-    this.time = time
-    this.status = status // added status property
-  }
-
-  //get upcoming tandems
-
+  // todo: method: get upcoming tandems
   get details() {
     return `
 # Tandem Details
@@ -18,19 +28,14 @@ class Tandem {
 Language: ${this.language}
 
 Participants:
+
 - ${this.user.name}
 - ${this.partner.name}
 
 `
   }
-
-  static create({ user, partner, language, date, time }) {
-    const newTandem = new Tandem({ user, partner, language, date, time })
-    Tandem.list.push(newTandem)
-    return newTandem
-  }
-
-  static list = []
 }
 
-module.exports = Tandem
+tandemSchema.loadClass(Tandem)
+
+module.exports = mongoose.model('Tandem', tandemSchema)
