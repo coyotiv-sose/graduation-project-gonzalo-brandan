@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1 Tandems
+  p Here is all the tandems that are currently created.
+
+  ul
+    each tandem in tandems
+      li= tandem.details
