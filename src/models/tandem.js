@@ -18,6 +18,7 @@ const tandemSchema = new mongoose.Schema({
   status: String,
 })
 
+tandemSchema.plugin(autopopulate)
 class Tandem {
   // todo: method: get upcoming tandems
   get details() {
