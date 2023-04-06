@@ -8,6 +8,8 @@ class Tandem {
     this.status = status // added status property
   }
 
+  //get upcoming tandems
+
   get details() {
     return `
 # Tandem Details
@@ -22,14 +24,13 @@ Participants:
 `
   }
 
-  static create({ user, partner, language, date, time, status }) {
-    const tandem = new Tandem(user, partner, language, date, time, 'initiated')
-
-    Tandem.list.push(tandem)
-
-    return tandem
+  static create({ user, partner, language, date, time }) {
+    const newTandem = new Tandem({ user, partner, language, date, time })
+    Tandem.list.push(newTandem)
+    return newTandem
   }
 
   static list = []
 }
+
 module.exports = Tandem

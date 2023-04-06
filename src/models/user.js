@@ -1,23 +1,64 @@
 const Tandem = require('./tandem')
+const mongoose = require('mongoose')
+
+const userSchema = new mongoose.Schema({
+  name: String,
+  targetLanguage: String,
+  offeredLanguage: String,
+  tandems: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Tandem',
+    },
+  ],
+  availability: [
+    {
+      date: String,
+      time: String,
+    },
+  ],
+  ratings: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Rating',
+    },
+  ],
+  rating: Number,
+})
 
 class User {
-  tandems = []
-  availability = []
-  ratings = []
-  rating = 5
-  matchedAvailabilities = []
-
-  constructor(name, targetLanguage, offeredLanguage) {
-    this.name = name
-    this.targetLanguage = targetLanguage
-    this.offeredLanguage = offeredLanguage
-  }
-
-  bookSession(partner, language, date, time) {
-    const tandem = new Tandem(this, partner, language, date, time)
+  initiateTandem(partner, language, date, time) {
+    const tandem = Tandem.create({ user: this, partner, language, date, time })
     tandem.status = 'initiated'
     this.tandems.push(tandem)
     partner.tandems.push(tandem)
+  }
+
+  acceptTandem(tandem) {
+    tandem.status = 'accepted'
+    const { date } = tandem
+    const { user, partner } = tandem
+    ;[user, partner].forEach(u => {
+      u.availability = u.availability.filter(avail => avail.date !== date) // remove availability for that date
+    })
+  }
+
+  declineTandem(tandem) {
+    tandem.status = 'declined'
+  }
+
+  cancelTandem(tandem) {
+    tandem.status = 'cancelled'
+  }
+
+  get pendingAcceptanceTandems() {
+    return this.tandems.filter(tandem => tandem.status === 'initiated' && tandem.partner === this)
+  }
+
+  rateUser(user, rating) {
+    user.ratings.push(rating)
+    const averageRating = user.ratings.reduce((sum, rating) => sum + rating, 0) / user.ratings.length
+    user.rating = averageRating.toFixed(1)
   }
 
   addAvailability(date, time) {
@@ -28,38 +69,11 @@ class User {
     this.availability = this.availability.filter(avail => avail.date !== date || avail.time !== time)
   }
 
-  acceptInvitation(tandem) {
-    tandem.status = 'accepted'
-    const { date } = tandem
-    const { user, partner } = tandem
-    ;[user, partner].forEach(u => {
-      u.availability = u.availability.filter(avail => avail.date !== date) // remove availability for that date
-    })
-  }
-
-  declineInvitation(tandem) {
-    tandem.status = 'declined'
-  }
-
-  cancelSession(tandem) {
-    tandem.status = 'cancelled'
-  }
-
-  rateUser(user, rating) {
-    user.ratings.push(rating)
-    const averageRating = user.ratings.reduce((sum, rating) => sum + rating, 0) / user.ratings.length
-    user.rating = averageRating.toFixed(1)
-  }
-
-  get pendingAcceptanceTandems() {
-    return this.tandems.filter(tandem => tandem.status === 'initiated' && tandem.partner === this)
-  }
-
   get details() {
     return `Name: ${this.name}
-Wants: ${this.targetLanguage}
-Offers: ${this.offeredLanguage}
-Rating: ${this.rating}
+    Wants: ${this.targetLanguage}
+    Offers: ${this.offeredLanguage}
+    Rating: ${this.rating}
 Tandems:\n${this.tandems
       .map(tandem => {
         let status = tandem.status
@@ -89,4 +103,4 @@ Availability:\n${this.availability.map(avail => `- ${avail.date} at ${avail.time
   static list = []
 }
 
-module.exports = User
+module.exports = mongoose.model('User', userSchema)

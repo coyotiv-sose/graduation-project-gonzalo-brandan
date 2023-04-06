@@ -1,10 +1,8 @@
 extends layout
 
 block content
-  h1 Lingolink users list
-  p Welcome, #{user.name}!
-
-  h2 Users
-  ul#users
+  h1 Users Page
+  h2 Welcome
+  ul
     each user in users
-      li.user= user.name
+      li= user.name

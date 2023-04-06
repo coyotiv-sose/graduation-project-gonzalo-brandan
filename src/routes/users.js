@@ -1,63 +1,25 @@
-var express = require('express')
-const Tandem = require('../tandem')
-const User = require('../user')
-var router = express.Router()
-router.get('/', function (req, res, next) {
-  res.render('users', {
-    // comes from .pug
-    title: 'Lingolink',
-    user: { name: 'Gonzalo' },
-    users: User.list.map(user => ({
-      name: user.name,
-      targetLanguage: user.targetLanguage,
-      offeredLanguage: user.offeredLanguage,
-      rating: user.rating,
-      tandems: user.tandems.map(tandem => ({
-        date: tandem.date,
-        time: tandem.time,
-        language: tandem.language,
-        status: tandem.status,
-        partner: tandem.partner.name,
-      })),
-    })),
-  })
-})
+const express = require('express')
+const router = express.Router()
+const User = require('../models/user')
+
 /* GET users listing. */
-router.get('/json', function (req, res, next) {
-  res.send(
-    User.list.map(user => ({
-      name: user.name,
-      targetLanguage: user.targetLanguage,
-      offeredLanguage: user.offeredLanguage,
-      rating: user.rating,
-      tandems: user.tandems.map(tandem => ({
-        date: tandem.date,
-        time: tandem.time,
-        language: tandem.language,
-        status: tandem.status,
-        partner: tandem.partner.name,
-      })),
-    }))
-  )
+router.get('/', async function (req, res, next) {
+  const users = await User.find()
+  if (req.query.view === 'json') return res.send(users)
+  res.render('users', { users })
 })
 
-/* Create a new user */
-router.post('/', function (req, res, next) {
-  const user = User.create({
-    name: req.body.name,
-    targetLanguage: req.body.targetLanguage,
-    offeredLanguage: req.body.offeredLanguage,
-  })
+// get a specific user by index
+router.get('/:userId', function (req, res, next) {
+  res.send(User.list[req.params.userId])
+})
 
+// create a new user
+router.post('/', function (req, res, next) {
+  const user = User.create({ name: req.body.name })
   res.send(user)
 })
 
-/* create a tandem for a user */
-
-router.post('/:userId/tandems', function (req, res, next) {
-  const tandem = user.createTandem(req.body.partner, req.body.language, req.body.date, req.body.time)
-
-  res.send(tandem)
-})
+// delete a user
 
 module.exports = router
