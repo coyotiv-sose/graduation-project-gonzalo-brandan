@@ -9,9 +9,10 @@ router.get('/', async function (req, res, next) {
   res.render('users', { users })
 })
 
-// get a specific user by index
-router.get('/:userId', function (req, res, next) {
-  res.send(User.list[req.params.userId])
+// get a specific user by index // look up
+router.get('/:userId', async function (req, res, next) {
+  const user = await User.findById({ _id: req.params.userId })
+  res.send(user)
 })
 
 // create a new user

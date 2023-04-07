@@ -5,4 +5,8 @@ block content
   h2 Welcome
   ul
     each user in users
-      li= user.name
+      li
+        a(href="/users/" + user._id)=user.name
+
+
+  //a(href="/picnics/" + picnic._id)=picnic.name
