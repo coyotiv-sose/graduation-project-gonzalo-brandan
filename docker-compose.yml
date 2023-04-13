@@ -1,0 +1,28 @@
+services:
+  api:
+    image: tandem-api
+    build: .
+    depends_on:
+      - mongodb
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./src:/app/src
+    #env_file:
+    #  - .env
+    environment:
+      - MONGODB_CONNECTION_STRING=mongodb://mongodb:27017/tandem
+  test:
+    command: node src/tests.js
+    image: tandem-api
+    build: .
+    depends_on:
+      - api
+    volumes:
+      - ./src/tests.js:/app/src/tests.js
+  mongodb:
+    image: mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./data:/data/db

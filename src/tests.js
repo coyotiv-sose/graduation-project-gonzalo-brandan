@@ -1,8 +1,8 @@
 const axios = require('axios')
-const Tandem = require('./models/tandem')
-const User = require('./models/user')
+//const Tandem = require('./models/tandem')
+//const User = require('./models/user')
 
-axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.baseURL = 'http://api:3000'
 
 console.log('Lingolink is a language exchange platform')
 
@@ -40,16 +40,7 @@ async function main() {
     time: '12:00',
   })
 
-  //console.log(gonzaloTandem.data)
-  //const gonzaloTandem = await axios.post('http://localhost:3000/tandems', {
-  //  user: gonzalo.data.name,
-  //  partner: maria.data.name,
-  //  language: 'Spanish',
-  //  date: '2020-01-01',
-  //  time: '12:00',
-  //})
-
-  // console.log(gonzaloTandem.data)
+  console.log('DATA FOR GONZALO TANDEM', gonzaloTandem.data)
 }
 
 main().catch(error => console.log(error.message ? error.message : error))

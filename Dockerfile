@@ -8,6 +8,6 @@ RUN npm install
 RUN npm install -g nodemon
 
 ADD bin ./bin
-ADD src ./src
+
 
 CMD [ "nodemon"]
