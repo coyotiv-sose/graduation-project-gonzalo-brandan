@@ -1,5 +1,5 @@
-#node version alpine
-FROM node:alpine
+FROM node:19.9.0-alpine3.17
+#from docker hub
 
 ENV NODE_ENV=production
 
