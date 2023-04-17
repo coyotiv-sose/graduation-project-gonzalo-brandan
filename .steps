@@ -1,0 +1,15 @@
+# steps to run my app if I have a new laptop
+# Insall OS ---> docker run -it alpine sh
+# Install Node.js ---> docker run -it t:alpine sh
+# add project files
+# run npm install
+# run npm start (or nodemo
+
+#docker build -t graduation-project-gonzalo-brandan .
+# docker run -p 3000:3000 -e MONGODB_CONNECTION_STRING="mongodb+srv://gonzalobrandan:sKx1YwsZMC18Funi@cluster0.ayrbyiz.mongodb.net/?retryWrites=true&w=majority" -v /workspaces/graduation-project-gonzalo-brandan/src:/src graduation-project-gonzalo-brandan
+
+# PROD
+# docker build -t graduation-project-gonzalo-brandan -f Dockerfile.production .
+
+# docker-compose up
+# docker-compose up --build

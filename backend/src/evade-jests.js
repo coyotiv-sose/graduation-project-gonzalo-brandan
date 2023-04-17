@@ -1,8 +1,8 @@
 const axios = require('axios')
-//const Tandem = require('./models/tandem')
-//const User = require('./models/user')
+const Tandem = require('./models/tandem') //was commented out
+const User = require('./models/user') //was commented out
 
-axios.defaults.baseURL = 'http://api:3000'
+axios.defaults.baseURL = 'http://localhost:3000' //it was api
 
 console.log('Lingolink is a language exchange platform')
 
