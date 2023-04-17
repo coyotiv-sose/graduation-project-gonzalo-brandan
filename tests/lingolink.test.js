@@ -25,17 +25,17 @@ describe('Lingolink', () => {
       name: 'Maria',
     })
 
+    const actualOutput = await request(app)
+      .post('/tandems')
+      .send({ user: gonzalo.body._id, partner: maria.body._id, language: 'Spanish', date: '2020-01-01', time: '12:00' })
+
     const expectedOutput = {
-      user: gonzalo.body._id,
-      partner: maria.body._id,
+      user: gonzalo.body,
+      partner: maria.body,
       language: 'Spanish',
       date: '2020-01-01',
       time: '12:00',
     }
-
-    const actualOutput = await request(app)
-      .post('/tandems')
-      .send({ user: gonzalo.body._id, partner: maria.body._id, language: 'Spanish', date: '2020-01-01', time: '12:00' })
 
     expect(actualOutput.body).toMatchObject(expectedOutput)
     expect(actualOutput.body._id).toBeDefined()

@@ -21,7 +21,7 @@ router.post('/', async function (req, res, next) {
   const user = await User.findById({ _id: req.body.user })
   const partner = await User.findById({ _id: req.body.partner })
   const tandem = await user.initiateTandem(partner, req.body.language, req.body.date, req.body.time)
-  res.send(tandem.details)
+  res.send(tandem)
 })
 
 module.exports = router
