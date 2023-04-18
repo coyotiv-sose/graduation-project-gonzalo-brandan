@@ -7,19 +7,38 @@ services:
     ports:
       - '3000:3000'
     volumes:
-      - ./src:/app/src
+      - ./backend/src:/app/src
     #env_file:
     #  - .env
     environment:
       - MONGODB_CONNECTION_STRING=mongodb://mongodb:27017/tandem
-  test:
-    command: node src/tests.js
-    image: tandem-api
-    build: .
-    depends_on:
-      - api
+  # test:
+  #   command: node src/tests.js
+  #   image: tandem-api
+  #   build: .
+  #   depends_on:
+  #     - api
+  #   volumes:
+  #     - ./src/tests.js:/app/src/tests.js
+  frontend:
+
+    image: lingolink-frontend
+
+    build:
+
+      context: frontend
+
+      dockerfile: Dockerfile
+
+    ports:
+
+      - 5173:5173
+
     volumes:
-      - ./src/tests.js:/app/src/tests.js
+
+      - ./frontend/src:/app/src
+
+      - ./frontend/public:/app/public
   mongodb:
     image: mongo
     ports:
