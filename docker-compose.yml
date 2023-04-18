@@ -1,7 +1,10 @@
 services:
   api:
     image: tandem-api
-    build: .
+    build:
+      context: backend
+
+      dockerfile: Dockerfile
     depends_on:
       - mongodb
     ports:
