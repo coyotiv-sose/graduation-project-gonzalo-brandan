@@ -8,7 +8,8 @@ router.get('/', async function (req, res, next) {
   const tandems = await Tandem.find()
   if (req.query.view === 'json') return res.send(tandems)
 
-  res.render('tandems', { tandems })
+  //res.render('tandems', { tandems })
+  res.send(tandems)
 })
 
 // get a specific tandem by index
