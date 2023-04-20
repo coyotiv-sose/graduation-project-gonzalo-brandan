@@ -1,24 +1,20 @@
 <script setup>
-import { ref } from 'vue'
+import { useCounterStore } from '@/stores/counter'
+
+const counter = useCounterStore()
+
 defineProps({
   name: {
     type: String,
     required: true
   }
 })
-const count = ref(0)
-const increment = () => {
-  count.value++
-}
-const decrement = () => {
-  count.value--
-}
 </script>
 
 <template lang="pug">
 div
   h1 {{ name }}
-  p Count: {{ count }}
-  button(@click='increment') Increment
-  button(@click='decrement') Decrement
+  p Count: {{ counter.count }}
+  button(@click='counter.increment') Increment
+  button(@click='counter.decrement') Decrement
 </template>
