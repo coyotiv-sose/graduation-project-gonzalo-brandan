@@ -21,26 +21,38 @@ console.log('Lingolink is a language exchange platform')
 // create a leaderboard with people with more sessions given and received
 
 async function main() {
-  const gonzalo = await axios.post('/users', {
-    name: 'Gonzalo',
+  // const armagan = await axios.post('/accounts', {
+  //   name: 'Armagan',
+  //   email: 'armagan@coyotiv.com',
+  //   password: '123456~',
+  // })
+
+  const loggedInGonzalo = await axios.post('/accounts/session', {
+    email: 'gonzalo@coyotiv.com',
+    password: '123456~',
   })
+  console.log('Logged in Gonzalo', loggedInGonzalo.data)
 
-  const maria = await axios.post('/users', {
-    name: 'Maria',
-  })
+  // const gonzalo = await axios.post('/users', {
+  //   name: 'Gonzalo',
+  // })
 
-  const allUsers = await axios.get('/users?view=json')
-  console.log('List of all users', allUsers.data)
+  // const maria = await axios.post('/users', {
+  //   name: 'Maria',
+  // })
 
-  const gonzaloTandem = await axios.post('/tandems', {
-    user: gonzalo.data._id,
-    partner: maria.data._id,
-    language: 'Spanish',
-    date: '2020-01-01',
-    time: '12:00',
-  })
+  // const allUsers = await axios.get('/users?view=json')
+  // console.log('List of all users', allUsers.data)
 
-  console.log('DATA FOR GONZALO TANDEM', gonzaloTandem.data)
+  // const gonzaloTandem = await axios.post('/tandems', {
+  //   user: gonzalo.data._id,
+  //   partner: maria.data._id,
+  //   language: 'Spanish',
+  //   date: '2020-01-01',
+  //   time: '12:00',
+  // })
+
+  // console.log('DATA FOR GONZALO TANDEM', gonzaloTandem.data)
 }
 
 main().catch(error => console.log(error.message ? error.message : error))

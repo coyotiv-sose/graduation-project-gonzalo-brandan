@@ -11,8 +11,8 @@ services:
       - '3000:3000'
     volumes:
       - ./backend/src:/app/src
-    #env_file:
-    #  - .env
+    env_file:
+      - backend/.env
     environment:
       - MONGODB_CONNECTION_STRING=mongodb://mongodb:27017/tandem
   # test:
@@ -24,21 +24,17 @@ services:
   #   volumes:
   #     - ./src/tests.js:/app/src/tests.js
   frontend:
-
     image: lingolink-frontend
 
     build:
-
       context: frontend
 
       dockerfile: Dockerfile
 
     ports:
-
       - 5173:5173
 
     volumes:
-
       - ./frontend/src:/app/src
 
       - ./frontend/public:/app/public

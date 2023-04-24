@@ -9,11 +9,23 @@ const cors = require('cors')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 
+// requires the model with Passport-Local Mongoose plugged in
+const User = require('./models/user')
+const passport = require('passport')
+
+// use static authenticate method of model in LocalStrategy
+passport.use(User.createStrategy())
+
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
 const mongoose = require('mongoose')
 
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
-const tandemsRouter = require('./routes/tandems') // import the tandemRouter
+const tandemsRouter = require('./routes/tandems')
+const accountsRouter = require('./routes/accounts')
 
 const app = express()
 
@@ -40,6 +52,8 @@ app.use(
   })
 )
 
+app.use(passport.session())
+
 app.use((req, res, next) => {
   const numberOfVisits = req.session.numberOfVisits || 0
   req.session.numberOfVisits = numberOfVisits + 1
@@ -47,7 +61,7 @@ app.use((req, res, next) => {
   req.session.history.push({ url: req.url, ip: req.ip })
   req.session.ip = req.ip
 
-  console.log('session', req.session)
+  //console.log('session', req.session)
 
   next()
 })
@@ -62,7 +76,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', indexRouter) //
 app.use('/tandems', tandemsRouter) // when the path is /tandem, use the tandemRouter
 app.use('/users', usersRouter) // when the path is /users, use the usersRouter
-// usersRouter is defined in src/routes/users.js
+
+app.use('/accounts', accountsRouter)
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404))

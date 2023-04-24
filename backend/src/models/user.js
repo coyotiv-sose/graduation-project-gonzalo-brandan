@@ -1,6 +1,7 @@
 const Tandem = require('./tandem')
 const mongoose = require('mongoose')
 const autopopulate = require('mongoose-autopopulate')
+const passportLocalMongoose = require('passport-local-mongoose')
 
 const userSchema = new mongoose.Schema({
   name: String,
@@ -28,6 +29,8 @@ const userSchema = new mongoose.Schema({
   rating: Number,
 })
 
+userSchema.plugin(autopopulate) // why not use it like in the example of npm?
+userSchema.plugin(passportLocalMongoose, { usernameField: 'email' })
 class User {
   async initiateTandem(partner, language, date, time) {
     const tandem = await Tandem.create({ user: this, partner: partner, language: language, date: date, time: time })
