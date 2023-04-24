@@ -4,6 +4,7 @@ const autopopulate = require('mongoose-autopopulate')
 const tandemSchema = new mongoose.Schema({
   date: String,
   language: String,
+  description: String,
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

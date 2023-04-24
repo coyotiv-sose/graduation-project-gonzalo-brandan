@@ -8,6 +8,7 @@ require('./database-connection')
 const cors = require('cors')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
+const mongoose = require('mongoose')
 
 // requires the model with Passport-Local Mongoose plugged in
 const User = require('./models/user')
@@ -19,8 +20,6 @@ passport.use(User.createStrategy())
 // use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
-
-const mongoose = require('mongoose')
 
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
@@ -66,7 +65,12 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use(cors())
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+)
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))

@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Tandem = require('../models/tandem')
 const User = require('../models/user')
+const generateDescription = require('../lib/description-generator')
 
 /* GET tandem listing. */
 router.get('/', async function (req, res, next) {

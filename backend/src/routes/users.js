@@ -27,6 +27,5 @@ router.post('/', async function (req, res, next) {
 
   res.send(user)
 })
-// delete a user
 
 module.exports = router

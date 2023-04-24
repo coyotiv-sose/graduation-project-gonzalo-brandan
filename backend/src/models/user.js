@@ -32,8 +32,15 @@ const userSchema = new mongoose.Schema({
 userSchema.plugin(autopopulate) // why not use it like in the example of npm?
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' })
 class User {
-  async initiateTandem(partner, language, date, time) {
-    const tandem = await Tandem.create({ user: this, partner: partner, language: language, date: date, time: time })
+  async initiateTandem(partner, language, date, time, description) {
+    const tandem = await Tandem.create({
+      user: this,
+      partner: partner,
+      language: language,
+      date: date,
+      time: time,
+      description,
+    })
     tandem.status = 'initiated'
     this.tandems.push(tandem)
     partner.tandems.push(tandem)

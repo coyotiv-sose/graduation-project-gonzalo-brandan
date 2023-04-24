@@ -5,7 +5,7 @@ const User = require('./models/user') //was commented out
 axios.defaults.baseURL = 'http://localhost:3000' //it was api
 
 console.log('Lingolink is a language exchange platform')
-
+// with AI recommend ice breakers when booking a tandem
 // I need to be able to create an user+
 // I need to be able to see all my sessions
 // I need to see other users
@@ -21,18 +21,29 @@ console.log('Lingolink is a language exchange platform')
 // create a leaderboard with people with more sessions given and received
 
 async function main() {
-  // const armagan = await axios.post('/accounts', {
-  //   name: 'Armagan',
-  //   email: 'armagan@coyotiv.com',
-  //   password: '123456~',
-  // })
-
-  const loggedInGonzalo = await axios.post('/accounts/session', {
+  //  const armagan = await axios.post('/accounts', {
+  //  name: 'Armagan',
+  //  email: 'armagan@coyotiv.com',
+  //  password: '123456~',
+  //  })
+  // CREATE USER
+  const gonzalo = await axios.post('/users', {
+    name: 'Gonzalo',
     email: 'gonzalo@coyotiv.com',
+    password: '321~',
+  })
+
+  const loggedInArmagan = await axios.post('/accounts/session', {
+    email: 'armagan@coyotiv.com',
     password: '123456~',
   })
-  console.log('Logged in Gonzalo', loggedInGonzalo.data)
+  console.log('Logged in Armagan', loggedInArmagan.data)
 
+  //const loggedInGonzalo = await axios.post('/accounts/session', {
+  //  email: 'gonzalo@coyotiv.com',
+  //  password: '321~',
+  //})
+  //console.log('Logged in Gonzalo', loggedInGonzalo.data)
   // const gonzalo = await axios.post('/users', {
   //   name: 'Gonzalo',
   // })
