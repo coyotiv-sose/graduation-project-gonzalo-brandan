@@ -1,6 +1,41 @@
-<script setup>
+<script>
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import { useAccountStore } from './stores/account'
+import { mapActions, mapState } from 'pinia'
+//import axios from 'axios'
+
+export default {
+  name: 'App',
+  components: {
+    HelloWorld,
+    RouterLink,
+    RouterView
+  },
+  async mounted() {
+    await this.fetchUser()
+  },
+  methods: {
+    ...mapActions(useAccountStore, ['fetchUser', 'logout'])
+  },
+  computed: {
+    ...mapState(useAccountStore, ['user'])
+  }
+}
+
+//   data() {
+//     user: null
+//   },
+//   mounted() {
+//     this.fetchUser()
+//   },
+//   methods: {
+//     async fetchUser() {
+//       this.user = (await axios.get('http://localhost:3000/accounts/session')).data
+//       withCredentials: true
+//     }
+//   }
+// }
 </script>
 
 <template>
@@ -8,14 +43,20 @@ import HelloWorld from './components/HelloWorld.vue'
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/tandems">Tandems</RouterLink>
+        <RouterLink v-if="!user" to="/login">Log in</RouterLink>
+        <RouterLink v-if="!user" to="/signup">Sign up</RouterLink>
+        <a v-if="user" @click="logout">Log out</a>
+        <!--<RouterLink to="/about">About</RouterLink>
         <RouterLink to="/login">Log in</RouterLink>
-        <RouterLink to="/signup">Sign up</RouterLink>
+        <RouterLink to="/signup">Sign up</RouterLink>-->
       </nav>
     </div>
   </header>
-
-  <RouterView />
+  <h1>Lingolink for {{ user?.name }}</h1>
+  <Suspense>
+    <RouterView />
+  </Suspense>
 </template>
 
 <style scoped>
