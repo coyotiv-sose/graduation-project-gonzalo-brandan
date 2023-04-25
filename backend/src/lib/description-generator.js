@@ -10,7 +10,7 @@ const openai = new OpenAIApi(configuration)
 module.exports = async function ({ name, location, date }) {
   const response = await openai.createCompletion({
     model: 'text-davinci-003',
-    prompt: `Create a description for a tandem event.
+    prompt: `Create a ice breaker for a tandem event.
 Title: ${user}
 Date: ${date}
 Description:`,
