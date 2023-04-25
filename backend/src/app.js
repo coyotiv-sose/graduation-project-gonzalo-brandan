@@ -100,4 +100,18 @@ app.use(function (err, req, res, next) {
   res.render('error')
 })
 
+app.createSocketServer = function (server) {
+  const io = require('socket.io')(server)
+
+  console.log('socket.io server created')
+
+  io.on('connection', function (socket) {
+    console.log('a user connected')
+
+    socket.on('disconnect', function () {
+      console.log('user disconnected')
+    })
+  })
+}
+
 module.exports = app
