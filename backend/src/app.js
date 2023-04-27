@@ -42,6 +42,7 @@ app.use(
     cookie: {
       secure: process.env.NODE_ENV === 'production',
       maxAge: 1000 * 60 * 60 * 24 * 15, // 15 days
+      sameSite: 'none',
     },
     store: MongoStore.create({
       //clientPromise: clientPromise,
@@ -60,7 +61,7 @@ app.use((req, res, next) => {
   req.session.history.push({ url: req.url, ip: req.ip })
   req.session.ip = req.ip
 
-  //console.log('session', req.session)
+  console.log('session', req.session.numberOfVisits)
 
   next()
 })
@@ -101,7 +102,12 @@ app.use(function (err, req, res, next) {
 })
 
 app.createSocketServer = function (server) {
-  const io = require('socket.io')(server)
+  const io = require('socket.io')(server, {
+    cors: {
+      origin: true,
+      credentials: true,
+    },
+  })
 
   console.log('socket.io server created')
 

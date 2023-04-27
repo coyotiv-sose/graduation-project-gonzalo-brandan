@@ -55,13 +55,13 @@ async function main() {
   // const allUsers = await axios.get('/users?view=json')
   // console.log('List of all users', allUsers.data)
 
-  // const gonzaloTandem = await axios.post('/tandems', {
-  //   user: gonzalo.data._id,
-  //   partner: maria.data._id,
-  //   language: 'Spanish',
-  //   date: '2020-01-01',
-  //   time: '12:00',
-  // })
+  const gonzaloTandem = await axios.post('/tandems', {
+    user: gonzalo.data._id,
+    partner: maria.data._id,
+    language: 'Spanish',
+    date: '2020-01-01',
+    time: '12:00',
+  })
 
   // console.log('DATA FOR GONZALO TANDEM', gonzaloTandem.data)
 }

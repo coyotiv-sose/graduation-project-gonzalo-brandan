@@ -39,7 +39,7 @@ class User {
       language: language,
       date: date,
       time: time,
-      description,
+      description: description,
     })
     tandem.status = 'initiated'
     this.tandems.push(tandem)

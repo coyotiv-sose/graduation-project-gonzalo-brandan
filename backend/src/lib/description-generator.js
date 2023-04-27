@@ -7,7 +7,7 @@ const configuration = new Configuration({
 })
 const openai = new OpenAIApi(configuration)
 
-module.exports = async function ({ name, location, date }) {
+module.exports = async function ({ user, date }) {
   const response = await openai.createCompletion({
     model: 'text-davinci-003',
     prompt: `Create a ice breaker for a tandem event.
