@@ -25,19 +25,17 @@ services:
   #     - ./src/tests.js:/app/src/tests.js
   frontend:
     image: lingolink-frontend
-
     build:
       context: frontend
-
       dockerfile: Dockerfile
-
     ports:
       - 5173:5173
-
     volumes:
       - ./frontend/src:/app/src
-
       - ./frontend/public:/app/public
+    env_file:
+      - frontend/.env
+
   mongodb:
     image: mongo
     ports:
