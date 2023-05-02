@@ -22,20 +22,6 @@ export default {
     ...mapState(useAccountStore, ['user'])
   }
 }
-
-//   data() {
-//     user: null
-//   },
-//   mounted() {
-//     this.fetchUser()
-//   },
-//   methods: {
-//     async fetchUser() {
-//       this.user = (await axios.get('http://localhost:3000/accounts/session')).data
-//       withCredentials: true
-//     }
-//   }
-// }
 </script>
 
 <template>
@@ -47,13 +33,10 @@ export default {
         <RouterLink v-if="!user" to="/login">Log in</RouterLink>
         <RouterLink v-if="!user" to="/signup">Sign up</RouterLink>
         <a v-if="user" @click="logout">Log out</a>
-        <!--<RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/login">Log in</RouterLink>
-        <RouterLink to="/signup">Sign up</RouterLink>-->
       </nav>
     </div>
   </header>
-  <h1>Lingolink for {{ user?.name }}</h1>
+  <!--<h1>Lingolink for {{ user?.name }}</h1>-->
   <Suspense>
     <RouterView />
   </Suspense>
