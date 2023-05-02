@@ -2,7 +2,7 @@ const axios = require('axios')
 const Tandem = require('./models/tandem') //was commented out
 const User = require('./models/user') //was commented out
 
-axios.defaults.baseURL = 'http://localhost:3000' //it was api
+axios.defaults.baseURL = 'https://backend-jdi5rgnuxa-ew.a.run.app' //it was api
 
 console.log('Lingolink is a language exchange platform')
 // with AI recommend ice breakers when booking a tandem
@@ -21,11 +21,11 @@ console.log('Lingolink is a language exchange platform')
 // create a leaderboard with people with more sessions given and received
 
 async function main() {
-  //  const armagan = await axios.post('/accounts', {
-  //  name: 'Armagan',
-  //  email: 'armagan@coyotiv.com',
-  //  password: '123456~',
-  //  })
+  const armagan = await axios.post('/accounts', {
+    name: 'Armagan',
+    email: 'armagan@coyotiv.com',
+    password: '123456~',
+  })
   // CREATE USER
   const gonzalo = await axios.post('/users', {
     name: 'Gonzalo',
@@ -55,13 +55,13 @@ async function main() {
   // const allUsers = await axios.get('/users?view=json')
   // console.log('List of all users', allUsers.data)
 
-  // const gonzaloTandem = await axios.post('/tandems', {
-  //   user: gonzalo.data._id,
-  //   partner: maria.data._id,
-  //   language: 'Spanish',
-  //   date: '2020-01-01',
-  //   time: '12:00',
-  // })
+  const gonzaloTandem = await axios.post('/tandems', {
+    user: gonzalo.data._id,
+    partner: armagan.data._id,
+    language: 'Spanish',
+    date: '2020-01-01',
+    time: '12:00',
+  })
 
   // console.log('DATA FOR GONZALO TANDEM', gonzaloTandem.data)
 }
