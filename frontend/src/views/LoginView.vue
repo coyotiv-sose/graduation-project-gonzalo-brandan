@@ -33,7 +33,7 @@ export default {
     div.mb-3
       label.form-label(for="password") Password:
       input.form-control#password(v-model="password" type="password" required)
-    div.loginButton
+    div.loginButton.d-flex.justify-content-center
       button.btn.btn-primary(type="submit") Log in
 
 </template>
