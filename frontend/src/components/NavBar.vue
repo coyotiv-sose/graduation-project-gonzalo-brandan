@@ -2,7 +2,7 @@
 <template lang="pug">
 nav.navbar.navbar-expand-lg.bg-body-tertiary
   .container-fluid
-    a.navbar-brand(href='#') Navbar
+    a.navbar-brand(href='#') Lingolink
     button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation')
       span.navbar-toggler-icon
     #navbarSupportedContent.collapse.navbar-collapse
