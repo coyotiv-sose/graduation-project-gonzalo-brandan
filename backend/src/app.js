@@ -31,6 +31,7 @@ const app = express()
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
+app.set('trust proxy', 1)
 
 const clientPromise = mongoose.connection.asPromise().then(connection => (connection = connection.getClient()))
 
