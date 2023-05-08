@@ -1,4 +1,11 @@
-<script></script>
+<script>
+export default {
+  name: 'NavBar',
+  props: {
+    user: Object
+  }
+}
+</script>
 <template lang="pug">
 nav.navbar.navbar-expand-lg.bg-body-tertiary
   .container-fluid
@@ -17,5 +24,4 @@ nav.navbar.navbar-expand-lg.bg-body-tertiary
           router-link.nav-link(to="/signup") Sign up
         li.nav-item(v-if="user")
           a.nav-link(@click="logout") Log out
-
 </template>
