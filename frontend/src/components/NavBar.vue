@@ -1,8 +1,14 @@
 <script>
+import { mapActions } from 'pinia'
+import { useAccountStore } from '../stores/account'
+
 export default {
   name: 'NavBar',
   props: {
     user: Object
+  },
+  methods: {
+    ...mapActions(useAccountStore, ['logout'])
   }
 }
 </script>
@@ -25,3 +31,9 @@ nav.navbar.navbar-expand-lg.bg-body-tertiary
         li.nav-item(v-if="user")
           a.nav-link(@click="logout") Log out
 </template>
+
+<style scoped>
+li a {
+  cursor: pointer;
+}
+</style>
