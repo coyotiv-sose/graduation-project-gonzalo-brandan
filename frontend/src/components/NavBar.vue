@@ -29,7 +29,10 @@ nav.navbar.navbar-expand-lg.bg-body-tertiary
         li.nav-item(v-if="!user")
           router-link.nav-link(to="/signup") Sign up
         li.nav-item(v-if="user")
+          router-link.nav-link(to="/users") Users
+        li.nav-item(v-if="user")
           a.nav-link(@click="logout") Log out
+
 </template>
 
 <style scoped>

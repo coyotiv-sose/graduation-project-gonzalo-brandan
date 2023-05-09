@@ -6,7 +6,7 @@ const User = require('../models/user')
 router.get('/', async function (req, res, next) {
   const users = await User.find()
   if (req.query.view === 'json') return res.send(users)
-  res.render('users', { users })
+  res.send(users)
 })
 
 // get a specific user by index // look up

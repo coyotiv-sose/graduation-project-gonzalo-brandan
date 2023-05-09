@@ -13,6 +13,10 @@ export const useUserStore = defineStore('User', {
         name,
         password
       })
+    },
+    async fetchUsers() {
+      const users = (await axios.get('/users')).data
+      return users
     }
   }
 })
