@@ -24,19 +24,35 @@ nav.navbar.navbar-expand-lg.bg-body-tertiary
           a.nav-link.active(aria-current='page' href='#') Home
         li.nav-item
           router-link.nav-link(to="/tandems") Tandems
+        li.nav-item
+          router-link.nav-link(to="/users") Users
         li.nav-item(v-if="!user")
           router-link.nav-link(to="/login") Log in
         li.nav-item(v-if="!user")
           router-link.nav-link(to="/signup") Sign up
         li.nav-item(v-if="user")
-          router-link.nav-link(to="/users") Users
-        li.nav-item(v-if="user")
-          a.nav-link(@click="logout") Log out
+          router-link.nav-link(to="/myavailability") My Availability
+        li.nav-item.dropdown
+          a.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false')
+            | {{ user?.name }}
+          ul.dropdown-menu
+            li
+              a.dropdown-item(href='#') My Profile
+            li
+            li.nav-item(v-if="user")
+              hr.dropdown-divider
+              a.nav-link(@click="logout") Log out
+
+
 
 </template>
 
 <style scoped>
 li a {
   cursor: pointer;
+}
+
+.nav-item.dropdown {
+  justify-content: end;
 }
 </style>
