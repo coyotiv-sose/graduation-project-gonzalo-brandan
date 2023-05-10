@@ -28,7 +28,6 @@ export default {
 
 <template>
   <NavBar :user="user" />
-  <h1>Lingolink for {{ user?.name }}</h1>
   <Suspense>
     <RouterView />
   </Suspense>
