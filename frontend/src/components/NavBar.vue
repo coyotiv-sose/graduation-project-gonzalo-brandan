@@ -32,14 +32,14 @@ nav.navbar.navbar-expand-lg.bg-body-tertiary
           router-link.nav-link(to="/signup") Sign up
         li.nav-item(v-if="user")
           router-link.nav-link(to="/myavailability") My Availability
-        li.nav-item.dropdown
+        li.nav-item.dropdown(v-if="user")
           a.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false')
             | {{ user?.name }}
           ul.dropdown-menu
             li
               a.dropdown-item(href='#') My Profile
             li
-            li.nav-item(v-if="user")
+            li.nav-item
               hr.dropdown-divider
               a.nav-link(@click="logout") Log out
 
