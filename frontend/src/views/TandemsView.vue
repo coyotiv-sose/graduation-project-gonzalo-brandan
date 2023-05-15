@@ -32,5 +32,5 @@ p Here you can see all the tandems that have been created by users.
 ul
   li(v-for="tandem in tandems" :key="tandem._id")
     RouterLink(:to="`/tandems/${tandem._id}`")
-      | {{ tandem.user.name }} and {{ tandem.partner.name }} on {{ tandem.date }} at {{ tandem.time }}. Language: {{ tandem.language }}
+      | {{ tandem.user?.name }} and {{ tandem.partner?.name }} on {{ tandem.date }} at {{ tandem.time }}. Language: {{ tandem.language }}
       </template>
