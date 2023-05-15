@@ -34,4 +34,11 @@ router.put('/', async function (req, res, next) {
   res.send(req.user)
 })
 
+router.post('/session', async (req, res, next) => {
+  // ...
+  res.header('Access-Control-Allow-Origin', 'https://frontend-jdi5rgnuxa-ew.a.run.app')
+  res.header('Access-Control-Allow-Credentials', true)
+  res.json({ message: 'Success!' })
+})
+
 module.exports = router
