@@ -34,7 +34,6 @@ export default {
       }
       this.availability.push(availability)
       await this.addAvailability(this.date, this.time)
-      this.$router.push('/')
     }
   }
 }
