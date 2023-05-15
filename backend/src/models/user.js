@@ -77,8 +77,9 @@ class User {
     user.rating = averageRating.toFixed(1)
   }
 
-  addAvailability(date, time) {
+  async addAvailability(date, time) {
     this.availability.push({ date, time })
+    await this.save()
   }
 
   removeAvailability(date, time) {
