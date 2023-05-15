@@ -28,7 +28,7 @@ export default {
       .card-body
         p.card-text
           | Some quick example text to build on the card title and make up the bulk of the card&apos;s content.
-        a.btn.btn-primary(href='#') Go somewhere <!--if user is logged in this button will book a tandem, otherwise will ask for sign up-->
+        a.btn.btn-primary(href='#') See availabilities
 </template>
 <style scoped>
 .card-img-top {
