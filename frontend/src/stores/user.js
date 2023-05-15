@@ -17,6 +17,12 @@ export const useUserStore = defineStore('User', {
     async fetchUsers() {
       const users = (await axios.get('/users')).data
       return users
+    },
+    async addAvailability(date, time) {
+      await axios.put('/users', {
+        date,
+        time
+      })
     }
   }
 })

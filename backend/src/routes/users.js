@@ -22,10 +22,16 @@ router.get('/:userId', async function (req, res, next) {
 // })
 router.post('/', async function (req, res, next) {
   const { name, email, password } = req.body
-
   const user = await User.register({ name, email }, password)
-
   res.send(user)
+})
+
+// update a user
+router.put('/', async function (req, res, next) {
+  console.log(req.body)
+  req.user.addAvailability(req.body.date, req.body.time)
+  await req.user.save()
+  res.send(req.user)
 })
 
 module.exports = router

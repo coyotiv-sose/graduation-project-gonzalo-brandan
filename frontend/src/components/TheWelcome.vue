@@ -15,8 +15,8 @@ const { data: tandems } = await axios.get('http://localhost:3000/tandems')
   <h1>Tandems</h1>
   <ul>
     <li v-for="tandem in tandems" :key="tandem.id">
-      {{ tandem.user.name }} and {{ tandem.partner.name }} have a tandem in {{ tandem.language }} on
-      {{ tandem.date }} at {{ tandem.time }}.
+      {{ tandem.user?.name }} and {{ tandem.partner?.name }} have a tandem in
+      {{ tandem.language }} on {{ tandem.date }} at {{ tandem.time }}.
     </li>
   </ul>
 </template>
