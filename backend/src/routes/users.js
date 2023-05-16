@@ -28,8 +28,9 @@ router.post('/', async function (req, res, next) {
 
 // update a user
 router.put('/', async function (req, res, next) {
+  if (!req.user) return res.status(401).send('You are not logged in')
   await req.user.addAvailability(req.body.date, req.body.time)
-  //await req.user.save()
+  await req.user.save()
   res.send(req.user)
 })
 
