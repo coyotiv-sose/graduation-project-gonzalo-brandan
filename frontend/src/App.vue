@@ -1,6 +1,5 @@
 <script>
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 import { useAccountStore } from './stores/account'
 import { mapActions, mapState } from 'pinia'
 //import axios from 'axios'
@@ -10,7 +9,6 @@ export default {
   name: 'App',
   components: {
     NavBar,
-    HelloWorld,
     RouterLink,
     RouterView
   },
