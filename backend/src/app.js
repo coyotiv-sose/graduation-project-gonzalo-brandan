@@ -43,7 +43,7 @@ app.use(
     cookie: {
       secure: process.env.NODE_ENV === 'production',
       maxAge: 1000 * 60 * 60 * 24 * 15, // 15 days
-      sameSite: process.env.NODE === 'production' ? 'none' : 'lax',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       //sameSite: 'lax', //make it dependent if production, otherwise sameSite: 'lax'
       // domain: process.env.NODE_ENV === 'production' ? 'https://backend-jdi5rgnuxa-ew.a.run.app' : 'localhost:3000', //heroku replace by backend url google
       domain: process.env.COOKIE_DOMAIN,
