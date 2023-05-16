@@ -1,9 +1,3 @@
-<!-- <script setup>
-import axios from 'axios'
-import { RouterLink } from 'vue-router'
-const { data: tandems } = await axios.get('http://localhost:3000/tandems')
-</script> -->
-
 <script>
 import axios from 'axios'
 import { RouterLink } from 'vue-router'
