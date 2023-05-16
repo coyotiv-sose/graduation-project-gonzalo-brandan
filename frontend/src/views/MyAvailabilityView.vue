@@ -34,14 +34,25 @@ export default {
       }
       this.availability.push(availability)
       await this.addAvailability(this.date, this.time)
+    },
+    formatDate(date) {
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+      const formattedDate = new Date(date).toLocaleDateString(undefined, options)
+      return formattedDate
     }
   }
 }
 </script>
 
 <template lang="pug">
-div My Availability {{ user.availability }}
-<!--form to add availability-->
+div
+  h2 My Availabilities
+  div
+    ul
+      li(v-for="availability in availability" :key="availability.id")
+        | {{ formatDate(availability.date) }} {{ availability.time }}
+
+div
 .container
   h2 Add Availability
     form(@submit.prevent="doAddAvailability")
@@ -61,7 +72,6 @@ div Edit Availability
 </template>
 
 <style scoped>
-/* exampleInputEmail1 */
 #inputDate,
 #inputTime {
   width: 10rem;
