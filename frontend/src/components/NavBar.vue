@@ -21,8 +21,6 @@ nav.navbar.navbar-expand-lg.bg-body-tertiary
     #navbarSupportedContent.collapse.navbar-collapse
       ul.navbar-nav.me-auto.mb-2.mb-lg-0
         li.nav-item
-          a.nav-link.active(aria-current='page' href='#') Home
-        li.nav-item
           router-link.nav-link(to="/tandems") Tandems
         li.nav-item
           router-link.nav-link(to="/users") Users
