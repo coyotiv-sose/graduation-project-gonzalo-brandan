@@ -25,9 +25,9 @@ const router = createRouter({
       component: () => import('../views/UsersView.vue')
     },
     {
-      path: '/myavailability',
-      name: 'myavailability',
-      component: () => import('../views/MyAvailabilityView.vue')
+      path: '/myavailabilities',
+      name: 'myavailabilities',
+      component: () => import('../views/MyAvailabilitiesView.vue')
     }
   ]
 })

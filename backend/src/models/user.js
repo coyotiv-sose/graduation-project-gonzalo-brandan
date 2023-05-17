@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
       autopopulate: { maxDepth: 1 },
     },
   ],
-  availability: [
+  availabilities: [
     {
       date: String,
       time: String,
@@ -55,7 +55,7 @@ class User {
     const { date } = tandem
     const { user, partner } = tandem
     ;[user, partner].forEach(u => {
-      u.availability = u.availability.filter(avail => avail.date !== date) // remove availability for that date
+      u.availabilities = u.availabilities.filter(avail => avail.date !== date) // remove availability for that date
     })
   }
 
@@ -78,7 +78,7 @@ class User {
   }
 
   async addAvailability(date, time) {
-    this.availability.push({ date, time })
+    this.availabilities.push({ date, time })
   }
 
   removeAvailability(date, time) {
@@ -105,7 +105,7 @@ Tandems:\n${this.tandems
         return `- ${tandem.user.name} and ${tandem.partner.name} (${tandem.language}) on ${tandem.date} at ${tandem.time} (${status})`
       })
       .join('\n')}
-Availability:\n${this.availability.map(avail => `- ${avail.date} at ${avail.time}`).join('\n')}`
+Availabilities:\n${this.availabilities.map(avail => `- ${avail.date} at ${avail.time}`).join('\n')}`
   }
 }
 

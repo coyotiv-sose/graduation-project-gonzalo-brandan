@@ -29,7 +29,7 @@ nav.navbar.navbar-expand-lg.bg-body-tertiary
         li.nav-item(v-if="!user")
           router-link.nav-link(to="/signup") Sign up
         li.nav-item(v-if="user")
-          router-link.nav-link(to="/myavailability") My Availability
+          router-link.nav-link(to="/myavailabilities") My Availabilities
         li.nav-item.dropdown(v-if="user")
           a.nav-link.dropdown-toggle(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false')
             | {{ user?.name }}

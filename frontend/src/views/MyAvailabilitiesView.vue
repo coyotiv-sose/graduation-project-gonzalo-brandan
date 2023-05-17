@@ -4,7 +4,7 @@ import { useAccountStore } from '../stores/account'
 import { useUserStore } from '../stores/user'
 
 export default {
-  name: 'MyAvailabilityView',
+  name: 'MyAvailabilitiesView',
   data() {
     return {
       date: '',
@@ -14,12 +14,12 @@ export default {
   },
   computed: {
     ...mapState(useAccountStore, ['user']),
-    availability: {
+    availabilities: {
       get() {
-        return this.user.availability
+        return this.user.availabilities
       },
       set(value) {
-        this.user.availability = value
+        this.user.availabilities = value
         this.$store.account.updateUser(this.user)
       }
     }
@@ -32,7 +32,7 @@ export default {
         time: this.time,
         repeatWeekly: this.repeatWeekly
       }
-      this.availability.push(availability)
+      this.availabilities.push(availability)
       await this.addAvailability(this.date, this.time)
     },
     formatDate(date) {
@@ -49,7 +49,7 @@ div
   h2 My Availabilities
   div
     ul
-      li(v-for="availability in availability" :key="availability.id")
+      li(v-for="availability in availabilities" :key="availability._id")
         | {{ formatDate(availability.date) }} {{ availability.time }}
 
 div

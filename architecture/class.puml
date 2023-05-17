@@ -1,7 +1,7 @@
 @startuml
 class User {
   tandems: Tandem[]
-  availability: { date: string, time: string }[]
+  availabilities: { date: string, time: string }[]
   ratings: number[]
   rating: number = 5
   constructor(name: string, targetLanguage: string, offeredLanguage: string)
