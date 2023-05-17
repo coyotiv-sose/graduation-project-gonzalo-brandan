@@ -21,7 +21,6 @@ passport.use(User.createStrategy())
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
-const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
 const tandemsRouter = require('./routes/tandems')
 const accountsRouter = require('./routes/accounts')
@@ -83,7 +82,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/', indexRouter) //
+//app.use('/', indexRouter) //
 app.use('/tandems', tandemsRouter) // when the path is /tandem, use the tandemRouter
 app.use('/users', usersRouter) // when the path is /users, use the usersRouter
 
