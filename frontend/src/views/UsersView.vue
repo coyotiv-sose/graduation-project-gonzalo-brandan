@@ -13,7 +13,10 @@ export default {
     this.users = await this.fetchUsers()
   },
   methods: {
-    ...mapActions(useUserStore, ['fetchUsers'])
+    ...mapActions(useUserStore, ['fetchUsers']),
+    directToProfile(userId) {
+      this.$router.push(`/profile/${userId}`)
+    }
   }
 }
 </script>
@@ -28,7 +31,7 @@ export default {
       .card-body
         p.card-text
           | Some quick example text to build on the card title and make up the bulk of the card&apos;s content.
-        a.btn.btn-primary(href='#') See availabilities
+        a.btn.btn-primary(@click="directToProfile(user._id)")  See profile
 </template>
 <style scoped>
 .card-img-top {

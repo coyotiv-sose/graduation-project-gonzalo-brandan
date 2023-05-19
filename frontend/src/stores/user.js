@@ -23,6 +23,21 @@ export const useUserStore = defineStore('User', {
         date,
         time
       })
+    },
+    async fetchUser(userId) {
+      const user = (await axios.get(`/users/${userId}`)).data
+      return user
+    },
+    async handleInitiateTandem(partner, language, date, time) {
+      const tandem = (
+        await axios.post('/tandems', {
+          partner,
+          language,
+          date,
+          time
+        })
+      ).data
+      return tandem
     }
   }
 })
