@@ -28,6 +28,11 @@ const router = createRouter({
       path: '/myavailabilities',
       name: 'myavailabilities',
       component: () => import('../views/MyAvailabilitiesView.vue')
+    },
+    {
+      path: '/profile/:userId',
+      name: 'user',
+      component: () => import('../views/OtherUserView.vue')
     }
   ]
 })
