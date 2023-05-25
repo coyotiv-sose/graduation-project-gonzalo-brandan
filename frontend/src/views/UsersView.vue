@@ -30,7 +30,9 @@ export default {
         h5.card-title {{ user?.name }}
       .card-body
         p.card-text
-          | Some quick example text to build on the card title and make up the bulk of the card&apos;s content.
+          | I want to learn: {{ user?.targetLanguage }}
+          br
+          | I offer: {{ user?.offeredLanguage}}
         a.btn.btn-primary(@click="directToProfile(user._id)")  See profile
 </template>
 <style scoped>

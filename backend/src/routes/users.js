@@ -16,8 +16,8 @@ router.get('/:userId', async function (req, res, next) {
 })
 
 router.post('/', async function (req, res, next) {
-  const { name, email, password } = req.body
-  const user = await User.register({ name, email }, password)
+  const { name, email, targetLanguage, offeredLanguage, password } = req.body
+  const user = await User.register({ name, email, targetLanguage, offeredLanguage }, password)
   res.send(user)
 })
 

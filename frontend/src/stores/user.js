@@ -7,10 +7,12 @@ axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
 export const useUserStore = defineStore('User', {
   actions: {
-    async signup(name, email, password) {
+    async signup(name, email, targetLanguage, offeredLanguage, password) {
       await axios.post('/users', {
         email,
         name,
+        targetLanguage,
+        offeredLanguage,
         password
       })
     },

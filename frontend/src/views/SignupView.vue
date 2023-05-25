@@ -8,13 +8,15 @@ export default {
     return {
       name: '',
       email: '',
+      targetLanguage: '',
+      offeredLanguage: '',
       password: ''
     }
   },
   methods: {
     ...mapActions(useUserStore, ['signup']),
     async doSignup() {
-      await this.signup(this.name, this.email, this.password)
+      await this.signup(this.name, this.email, this.targetLanguage, this.offeredLanguage ,this.password)
       this.$router.push('/login')
     }
   }
@@ -33,6 +35,24 @@ export default {
       label.form-label(for="email") Email:
       input.form-control#email(v-model="email" type="text" required)
 
+    div#targetLanguageInput
+      label.form-label(for="targetLanguage") I want to learn:
+      select.form-select#targetLanguage(v-model="targetLanguage" required)
+        option(value="" disabled selected) Select language
+        option(value="German") German
+        option(value="Spanish") Spanish
+        option(value="Turkish") Turkish
+
+
+    div#offeredLanguageInput
+      label.form-label(for="offeredLanguage") I speak fluently:
+      select.form-select#offeredLanguage(v-model="offeredLanguage" required)
+        option(value="" disabled selected) Select language
+        option(value="German") German
+        option(value="Spanish") Spanish
+        option(value="Turkish") Turkish
+
+
     div.mb-3
       label.form-label(for="password") Password:
       input.form-control#password(v-model="password" type="password" required)
@@ -42,7 +62,9 @@ export default {
 </template>
 <style scoped>
 #emailInput,
-#nameInput {
+#nameInput,
+#targetLanguageInput,
+#offeredLanguageInput {
   margin-bottom: 1rem;
 }
 .signupButton {
