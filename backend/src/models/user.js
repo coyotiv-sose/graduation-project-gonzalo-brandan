@@ -109,6 +109,5 @@ Availabilities:\n${this.availabilities.map(avail => `- ${avail.date} at ${avail.
 }
 
 userSchema.loadClass(User) // add methods to schema
-userSchema.plugin(autopopulate)
 
 module.exports = mongoose.model('User', userSchema)
