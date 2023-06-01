@@ -27,9 +27,9 @@ export default {
 </script>
 
 <template lang="pug">
-p name {{ user.name  }}
+
 div
-  h2 My Availabilities
+  h2 Availabilities of {{ user.name  }}
   div
     ul
       li(v-for="availability in user.availabilities" :key="availability._id")
