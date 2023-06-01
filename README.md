@@ -11,7 +11,7 @@ Lingolink is a web application designed to facilitate language exchange between 
 You can visit the deployed version in:
 https://frontend-jdi5rgnuxa-ew.a.run.app/
 
-This project is still in development.
+This project is a graduation project for my Full Stack Software Engineering bootcamp at Coyotiv, and it is still being developed.
 
 ---
 
