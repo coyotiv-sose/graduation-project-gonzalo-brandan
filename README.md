@@ -8,13 +8,16 @@
 
 Lingolink is a web application designed to facilitate language exchange between users. It allows users to book tandem sessions with other users who speak the language they want to learn, create and manage their availability for these sessions, and rate each other's language proficiency after each session.
 
-This project is a graduation project for my Full Stack Developer bootcamp at Coyotiv, and it's currently in daily progress. The project will end in May.
+You can visit the deployed version in:
+https://frontend-jdi5rgnuxa-ew.a.run.app/
+
+This project is a graduation project for my Full Stack Developer bootcamp at Coyotiv, and it is still being developed.
 
 ---
 
 ## MIT License
 
-Copyright (c) 2022 Coyotiv
+Copyright (c) 2022 Gonzalo Brandan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
