@@ -2,7 +2,7 @@ const axios = require('axios')
 const Tandem = require('./models/tandem') //was commented out
 const User = require('./models/user') //was commented out
 
-axios.defaults.baseURL = 'https://backend-jdi5rgnuxa-ew.a.run.app' //it was api
+axios.defaults.baseURL = 'https://backend-fk3qzypu7a-ew.a.run.app' //it was api
 
 console.log('Lingolink is a language exchange platform')
 // with AI recommend ice breakers when booking a tandem
